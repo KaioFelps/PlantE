@@ -1,0 +1,14 @@
+    listeTerrenos(id_usuario);
+    obtenhaSugestoes(id_terreno);
+    obtenhaDetalhes(idPlanta);
+    recebaDadosDoSolo(idTerreno, acidez, índiceDeMinerais, índiceDeSalinidade, índiceDeArgila, índiceDeAreia, índiceDeSilte, cargaElétrica);
+    busqueProduto(consulta);
+    denuncie(
+	idUsuário,
+	idDenunciável,
+	tipo,
+	motivo,
+	detalhes?
+)
+
+
