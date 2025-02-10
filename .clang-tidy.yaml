@@ -18,14 +18,14 @@ CheckOptions:
   - key: readability-identifier-naming.NamespaceCase
     value: CamelCase
   - key: readability-identifier-naming.VariableCase
-    value: lower_case
+    value: camelBack
   - key: readability-identifier-naming.FunctionCase
-    value: lower_case
+    value: camelBack
   - key: readability-identifier-naming.ConstantCase
     value: UPPER_CASE
   - key: readability-identifier-naming.ConstexprVariableCase
     value: UPPER_CASE
   - key: readability-identifier-naming.MemberCase
-    value: lower_case
+    value: camelBack
   - key: readability-identifier-naming.GlobalConstantCase
     value: UPPER_CASE

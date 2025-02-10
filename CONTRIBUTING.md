@@ -21,7 +21,8 @@ Este comando gera o arquivo `build/compile_commands.json`, necessário para o cl
 ## Padrões de código
 - Todos os nomes devem estar em **português**;
 - Nomes de pastas, arquivos, variáveis, métodos e de classes **não devem conter acentos nem espaços**;
-- Nomes de pastas, arquivos, variáveis e métodos devem utilizar o padrão **[snake case]** (por exemplo: `./criar_novo_usuário.cpp`);
+- Nomes de pastas e arquivos devem seguir o padrão **[snake_case]** (por exemplo: `./criar_novo_usuário.cpp`);
+- Variáveis, propriedades e métodos devem utilizar o padrão **[camelCase]** (por exemplo: `obtenhaTerreno()`);
 - Nomes de classes, enums e workspaces devem utilizar o padrão **[PascalCase]** (por exemplo: ``class FooBar {};`);
 - Constantes (globais ou não) devem utilizar **[screaming snake case]** (por exemplo: `IDADE_MÍNIMA`);
 - Escopos devem seguir o padrão **[Allman]**;
@@ -31,6 +32,7 @@ Este comando gera o arquivo `build/compile_commands.json`, necessário para o cl
 [snake case]: https://www.alura.com.br/artigos/convencoes-nomenclatura-camel-pascal-kebab-snake-case#tabela
 [screaming snake case]: https://www.alura.com.br/artigos/convencoes-nomenclatura-camel-pascal-kebab-snake-case#tabela
 [Allman]: https://en.wikipedia.org/wiki/Indentation_style#Allman_style
+[camelCase]: https://www.alura.com.br/artigos/convencoes-nomenclatura-camel-pascal-kebab-snake-case#tabela
 [PascalCase]: https://www.alura.com.br/artigos/convencoes-nomenclatura-camel-pascal-kebab-snake-case#tabela
 
 ## Estrutura de pastas
