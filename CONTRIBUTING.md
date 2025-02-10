@@ -8,8 +8,8 @@ Antes de começar, instale as extensões necessárias para o desenvolvimento:
 2. Instale o g++ (`sudo apt-get install g++`) para compilar e rodar o código;
 3. Instale a extensão [C/C++ Extension Pack] para obter intellisense ao programar com C++;
 4. Instale [clang-format] (`sudo apt-get install clang-format`) para formatar o código;
-5. Instale [bear] (`sudo apt-get install bear`) para gerar um banco de dados de compilação utilizando o Makefile;
-6. Instale [clang-tidy] (`sudo apt-get install clang-tidy`) para garantir os padrões do código.
+5. Instale bear (`sudo apt-get install bear`) para gerar um banco de dados de compilação utilizando o Makefile;
+6. Instale clang-tidy (`sudo apt-get install clang-tidy`) para garantir os padrões do código.
 
 Com o ambiente configurado, rode o comando `./tidy.sh` para que o clang-tidy possa analisar o código e formatá-lo.
 Este comando gera o arquivo `build/compile_commands.json`, necessário para o clang-tidy.
