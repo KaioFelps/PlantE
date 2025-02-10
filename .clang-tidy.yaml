@@ -5,7 +5,8 @@ Checks: |
   readability-identifier-naming,
   readability-*,
   -modernize-use-trailing-return-type,
-  -warnings-as-errors
+  -warnings-as-errors,
+  -modernize-use-nodiscard
   
 CheckOptions:
   - key: readability-identifier-naming.ClassCase
