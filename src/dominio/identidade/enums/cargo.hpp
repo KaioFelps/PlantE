@@ -1,3 +1,5 @@
+#pragma ONCE
+
 namespace Identidade::Enums
 {
 

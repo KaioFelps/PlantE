@@ -1,3 +1,5 @@
+#pragma ONCE
+
 #include "../enums/cargo.hpp"
 #include <ctime>
 #include <sstream>
