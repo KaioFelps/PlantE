@@ -1,0 +1,24 @@
+BasedOnStyle: LLVM
+Language: Cpp
+
+# Escopos no estilo Allman (chaves em linhas separadas)
+BreakBeforeBraces: Allman
+
+# Indentação com 4 espaços
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+# Outras configurações para manter consistência
+AllowShortIfStatementsOnASingleLine: true
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: false
+BinPackParameters: false
+ColumnLimit: 80
+PointerAlignment: Left
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: true
