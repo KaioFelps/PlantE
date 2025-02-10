@@ -11,8 +11,14 @@ Antes de começar, instale as extensões necessárias para o desenvolvimento:
 5. Instale bear (`sudo apt-get install bear`) para gerar um banco de dados de compilação utilizando o Makefile;
 6. Instale clang-tidy (`sudo apt-get install clang-tidy`) para garantir os padrões do código.
 
-Com o ambiente configurado, rode o comando `./tidy.sh` para que o clang-tidy possa analisar o código e formatá-lo.
-Este comando gera o arquivo `build/compile_commands.json`, necessário para o clang-tidy.
+Por fim, rode os comandos abaixo para configurar o ambiente de desenvolvimento:
+```bash
+# gera o arquivo build/compile_commands.json
+# para que o clang-tidy possa analisar o código e formatá-lo
+./tidy.sh
+# copia as configurações das extensões
+cp .vscode/settings.example.json .vscode/settings.json
+```
 
 [WSL2]: https://learn.microsoft.com/pt-br/windows/wsl/install
 [C/C++ Extension `Pack]: https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack
