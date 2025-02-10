@@ -1,11 +1,16 @@
 # Plant&
 
-## Como rodar a aplicação
-
+## Rodando a aplicação
 Digite no terminal:
 
 ```bash
-# `make` rodará o script contido em `./Makefile` para compilar a aplicação num binário `./main`
-# `./main` roda o bináio
-make && ./main
+# compila e roda a aplicação
+make run
 ```
+
+## Contribuindo
+
+Para contribuir, leia as instruções da [Guia de Contribuição] para detalhes sobre a arquitetura do sistema,
+padrões de código, entre outros.
+
+[Guia de Contribuição]: ./CONTRIBUTING.md
