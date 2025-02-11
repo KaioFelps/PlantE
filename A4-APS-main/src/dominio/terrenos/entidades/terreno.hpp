@@ -1,7 +1,7 @@
 #pragma once
 
 #include "./solo.hpp"
-#include "../../identidade/enums/cargo.hpp"
+#include "../../identidade/enums/enum_terreno.hpp"
 #include <optional>
 
 using namespace std;
