@@ -15,26 +15,26 @@ class Usuario
   private:
     string nome;
     string email;
-    string hashDaSeha;
+    string hashDaSenha;
     time_t dataDeNascimento;
     Cargo cargo;
 
   public:
     Usuario(string nome,
             string email,
-            string hashDaSeha,
+            string hashDaSenha,
             time_t dataDeNascimento,
             Cargo cargo);
 
     const string* obtenhaNome() const;
     const string* obtenhaEmail() const;
-    const string* obtenhaHashDaSeha() const;
+    const string* obtenhaHashDaSenha() const;
     const time_t* obtenhaDataDeNascimento() const;
     const Cargo* obtenhaCargo() const;
 
     void coloqueNome(string nome);
     void coloqueEmail(string email);
-    void coloqueHashDaSeha(string hashDaSeha);
+    void coloqueHashDaSenha(string hashDaSenha);
     void coloqueDataDeNascimento(time_t dataDeNascimento);
     void coloqueCargo(Cargo cargo);
 };
