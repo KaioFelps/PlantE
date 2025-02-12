@@ -1,17 +1,17 @@
-#include "usuario.hpp"
+#include "./usuario.hpp"
 
 namespace Identidade::Entidades
 {
 
 Usuario::Usuario(string nome,
                  string email,
-                 string hashDaSeha,
+                 string hashDaSenha,
                  time_t dataDeNascimento,
                  Cargo cargo)
 {
     this->nome = nome;
     this->email = email;
-    this->hashDaSeha = hashDaSeha;
+    this->hashDaSenha = hashDaSenha;
     this->dataDeNascimento = dataDeNascimento;
     this->cargo = cargo;
 };
@@ -26,9 +26,9 @@ const string* Usuario::obtenhaEmail() const
     return &this->email;
 }
 
-const string* Usuario::obtenhaHashDaSeha() const
+const string* Usuario::obtenhaHashDaSenha() const
 {
-    return &this->hashDaSeha;
+    return &this->hashDaSenha;
 }
 
 const time_t* Usuario::obtenhaDataDeNascimento() const
@@ -51,9 +51,9 @@ void Usuario::coloqueEmail(string email)
     this->email = email;
 }
 
-void Usuario::coloqueHashDaSeha(string hashDaSeha)
+void Usuario::coloqueHashDaSenha(string hashDaSenha)
 {
-    this->hashDaSeha = hashDaSeha;
+    this->hashDaSenha = hashDaSenha;
 }
 
 void Usuario::coloqueDataDeNascimento(time_t dataDeNascimento)
