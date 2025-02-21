@@ -18,10 +18,10 @@ jobs:
       - name: "Instala clang-format"
         run: sudo apt-get install clang-format
       - name: "Confere a formatação recursivamente para todos os arquivos .cpp e .hpp"
-        run: find . -name "*.cpp" -o -name "*.hpp" | xargs clang-format \
+        run: find . -regex '.*\.\(cpp\|hpp\)' -exec clang-format \
           --style=file:./.clang-format.yaml \
           --Werror \
-          --dry-run
+          --dry-run {} +
         
   check_code_linting:
     name: "Garante que o código esteja seguindo os padrões definidos na guia de contribuição"
@@ -31,13 +31,17 @@ jobs:
         - name: "Instala o bear"
           run: sudo apt-get install bear
         - name: "Instala o clang-tidy"
+          run: sudo apt-get install clang-tidy
+        - name: "Configura o bear"
           run: |
-            sudo apt-get install clang-tidy
+            chmod +x ./tidy.sh
             ./tidy.sh
+            ls ./build
         - name: "Garante que os padrões de código exigidos estejam sendo seguidos"
-          run: find . -name "*.cpp" -o -name "*.hpp" | xargs clang-tidy \
+          run: find .  -regex '.*\.\(cpp\|hpp\)' -exec clang-tidy \
             --config-file=./.clang-tidy.yaml \
             -p build \
             --header-filter=.* \
             --quiet \
-            --warnings-as-errors=*
+            --warnings-as-errors=* \
+            {} +
