@@ -16,10 +16,7 @@ jobs:
         run: sudo apt-get install -y clang-format-14
 
       - name: "Confere a formatação recursivamente para todos os arquivos .cpp e .hpp"
-        run: find . \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-format \
-          --style=file:$GITHUB_WORKSPACE/.clang-format.yaml \
-          --Werror \
-          --dry-run {} +
+        run: find . \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-format --style=file:$GITHUB_WORKSPACE/.clang-format.yaml --Werror --dry-run {} +
         
   check_code_linting:
     name: "Garante que o código esteja seguindo os padrões definidos na guia de contribuição"
@@ -54,9 +51,4 @@ jobs:
             pwd
 
         - name: "Garante que os padrões de código exigidos estejam sendo seguidos"
-          run: find . \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-tidy \
-            --config-file=$GITHUB_WORKSPACE/.clang-tidy.yaml \
-            -p=$GITHUB_WORKSPACE/build \
-            --header-filter=.* \
-            --quiet \
-            --warnings-as-errors=* {} +
+          run: find . \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-tidy --config-file=./.clang-tidy.yaml -p=./build --header-filter=.* --quiet --warnings-as-errors=* {} +
