@@ -45,12 +45,12 @@ jobs:
 
         - name: "Mostra os arquivos para debugar"
           run: |
-            ls
-            echo
-            ls src
-            echo
-            ls build
-            echo
+            ls -a
+            echo -e "\n\n"
+            ls -a src
+            echo -e "\n\n"
+            ls -a build
+            echo -e "\n\n"
             pwd
 
         - name: "Garante que os padrões de código exigidos estejam sendo seguidos"
