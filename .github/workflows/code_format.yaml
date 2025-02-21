@@ -1,0 +1,46 @@
+name: Code Formatting
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check_code_format:
+    name: "Garante que o código esteja corretamente formatado"
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Garante que o gcc-10 e g++-10 estejam instalados"
+        run: |
+          sudo apt install gcc-10 g++-10
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 --slave /usr/bin/g++ g++ /usr/bin/g++-10 --slave /usr/bin/gcov gcov /usr/bin/gcov-10
+          sudo update-alternatives --set gcc /usr/bin/gcc-10
+      - name: "Instala clang-format"
+        run: sudo apt-get install clang-format
+      - name: "Confere a formatação recursivamente para todos os arquivos .cpp e .hpp"
+        run: find . -regex '.*\.\(cpp\|hpp\)' -exec clang-format \
+          --style=file:./.clang-format.yaml \
+          --Werror \
+          --dry-run \
+          {} \;
+        
+  check_code_linting:
+    name: "Garante que o código esteja seguindo os padrões definidos na guia de contribuição"
+    runs-on: "ubuntu-latest"
+    steps:
+        - uses: actions/checkout@v4
+        - name: "Instala o bear"
+          run: sudo apt-get install bear
+        - name: "Instala o clang-tidy"
+          run: |
+            sudo apt-get install clang-tidy
+            ./tidy.sh
+        - name: "Garante que os padrões de código exigidos estejam sendo seguidos"
+          run: clang-tidy ./**/*.cpp ./**/*.hpp \
+            --config-file=./.clang-tidy.yaml \
+            -p=build \
+            --header-filter=.* \
+            --quiet \
+            --warnings-as-errors=*
+
+      
