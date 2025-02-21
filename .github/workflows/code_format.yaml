@@ -10,13 +10,15 @@ jobs:
     runs-on: "ubuntu-22.04"
     steps:
       - uses: actions/checkout@v4
+
       - name: "Garante que o gcc-10 e g++-10 estejam instalados"
         run: |
-          sudo apt install gcc-10 g++-10
-          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 --slave /usr/bin/g++ g++ /usr/bin/g++-10 --slave /usr/bin/gcov gcov /usr/bin/gcov-10
+          sudo apt install -y gcc-10 g++-10
           sudo update-alternatives --set gcc /usr/bin/gcc-10
+
       - name: "Instala clang-format"
-        run: sudo apt-get install clang-format
+        run: sudo apt-get install -y clang-format-14
+
       - name: "Confere a formatação recursivamente para todos os arquivos .cpp e .hpp"
         run: find . \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-format \
           --style=file:$GITHUB_WORKSPACE/.clang-format.yaml \
@@ -28,15 +30,29 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
         - uses: actions/checkout@v4
+
+        - name: "Garante que o gcc-10 e g++-10 estejam instalados"
+          run: |
+            sudo apt install gcc-10 g++-10
+            sudo update-alternatives --set gcc /usr/bin/gcc-10
+
+        - run: sudo apt-get update
+
         - name: "Instala o bear"
           run: sudo apt-get install bear
+
         - name: "Instala o clang-tidy"
-          run: sudo apt-get install clang-tidy
+          run: |
+            sudo apt-get install -y clang-tidy-14
+            sudo update-alternatives --set clang-tidy /usr/bin/clang-tidy-14
+            clang-tidy --version
+
         - name: "Configura o bear"
           run: |
             chmod +x ./tidy.sh
             ./tidy.sh
             ls ./build
+
         - name: "Garante que os padrões de código exigidos estejam sendo seguidos"
           run: find . \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-tidy \
             --config-file=$GITHUB_WORKSPACE/.clang-tidy.yaml \
@@ -44,3 +60,13 @@ jobs:
             --header-filter=.* \
             --quiet \
             --warnings-as-errors=* {} +
+
+        - name: "Mostra os arquivos para debugar"
+          run: |
+            ls
+            echo
+            ls src
+            echo
+            ls build
+            echo
+            pwd
