@@ -21,7 +21,7 @@ cp .vscode/settings.example.json .vscode/settings.json
 ```
 
 [WSL2]: https://learn.microsoft.com/pt-br/windows/wsl/install
-[C/C++ Extension `Pack]: https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack
+[C/C++ Extension Pack]: https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack
 [clang-format]: https://terminalroot.com.br/2023/07/formate-seu-codigo-com-clang-format.html
 
 ## Padrões de código
@@ -35,7 +35,7 @@ cp .vscode/settings.example.json .vscode/settings.json
 - O código deve ser identado como 4 espaços.
 
 
-[snake case]: https://www.alura.com.br/artigos/convencoes-nomenclatura-camel-pascal-kebab-snake-case#tabela
+[snake_case]: https://www.alura.com.br/artigos/convencoes-nomenclatura-camel-pascal-kebab-snake-case#tabela
 [screaming snake case]: https://www.alura.com.br/artigos/convencoes-nomenclatura-camel-pascal-kebab-snake-case#tabela
 [Allman]: https://en.wikipedia.org/wiki/Indentation_style#Allman_style
 [camelCase]: https://www.alura.com.br/artigos/convencoes-nomenclatura-camel-pascal-kebab-snake-case#tabela
@@ -65,7 +65,7 @@ diretório dentro do domínio ao qual pertence:
 | Data Access Object        | `dao/`            | São classes que atuam como repositórios, servindo como acesso para o armazenamento de uma entidade específica (seja para criar, atualizar, remover ou buscá-la).   |
 | Data Validation Object    | `dvo/`            | São classes responsáveis por validar os dados de uma entidade. Por exemplo, ela pode garantir que determinada propriedade esteja sempre dentro de um intervalo específico, como idade. |
 | Casos de Uso              | `casos_de_uso/`   | São classes responáveis por executar um caso de uso do sistema. |
-| Gerentes                  | `gerentess/`      | São classes que atuam como "factories" (fábricas), responsáveis por instanciar e ceder instâncias de um determinado conteúdo. |
+| Gerentes                  | `gerentes/`      | São classes que atuam como "factories" (fábricas), responsáveis por instanciar e ceder instâncias de um determinado conteúdo. |
 
 ### Infraestrutura
 Serviços externos devem ser alocados no diretório `infra/`. Por exemplo, implementações de DAOs devem ser
