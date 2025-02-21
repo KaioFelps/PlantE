@@ -18,8 +18,8 @@ jobs:
       - name: "Instala clang-format"
         run: sudo apt-get install clang-format
       - name: "Confere a formatação recursivamente para todos os arquivos .cpp e .hpp"
-        run: find . -regex '.*\.\(cpp\|hpp\)' -exec clang-format \
-          --style=file:./.clang-format.yaml \
+        run: find . \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-format \
+          --style=file:.clang-format.yaml \
           --Werror \
           --dry-run {} +
         
@@ -38,10 +38,9 @@ jobs:
             ./tidy.sh
             ls ./build
         - name: "Garante que os padrões de código exigidos estejam sendo seguidos"
-          run: find .  -regex '.*\.\(cpp\|hpp\)' -exec clang-tidy \
+          run: find . \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-tidy \
             --config-file=./.clang-tidy.yaml \
-            -p build \
+            -p ./build \
             --header-filter=.* \
             --quiet \
-            --warnings-as-errors=* \
-            {} +
+            --warnings-as-errors=* {} +
