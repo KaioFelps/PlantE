@@ -8,7 +8,7 @@ jobs:
   check_code_format:
     name: "Garante que o código esteja corretamente formatado"
     runs-on: "ubuntu-22.04"
-    
+
     steps:
       - uses: actions/checkout@v4
 
@@ -35,7 +35,6 @@ jobs:
         - name: "Instala o clang-tidy"
           run: |
             sudo apt-get install -y clang-tidy-14
-            sudo update-alternatives --set clang-tidy /usr/bin/clang-tidy-14
             clang-tidy --version
 
         - name: "Configura o bear"
@@ -43,14 +42,6 @@ jobs:
             chmod +x ./tidy.sh
             ./tidy.sh
             ls ./build
-
-        - name: "Garante que os padrões de código exigidos estejam sendo seguidos"
-          run: find . \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-tidy \
-            --config-file=$GITHUB_WORKSPACE/.clang-tidy.yaml \
-            -p=$GITHUB_WORKSPACE/build \
-            --header-filter=.* \
-            --quiet \
-            --warnings-as-errors=* {} +
 
         - name: "Mostra os arquivos para debugar"
           run: |
@@ -61,3 +52,11 @@ jobs:
             ls build
             echo
             pwd
+
+        - name: "Garante que os padrões de código exigidos estejam sendo seguidos"
+          run: find . \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-tidy \
+            --config-file=$GITHUB_WORKSPACE/.clang-tidy.yaml \
+            -p=$GITHUB_WORKSPACE/build \
+            --header-filter=.* \
+            --quiet \
+            --warnings-as-errors=* {} +
