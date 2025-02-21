@@ -8,13 +8,9 @@ jobs:
   check_code_format:
     name: "Garante que o código esteja corretamente formatado"
     runs-on: "ubuntu-22.04"
+    
     steps:
       - uses: actions/checkout@v4
-
-      - name: "Garante que o gcc-10 e g++-10 estejam instalados"
-        run: |
-          sudo apt install -y gcc-10 g++-10
-          sudo update-alternatives --set gcc /usr/bin/gcc-10
 
       - name: "Instala clang-format"
         run: sudo apt-get install -y clang-format-14
@@ -30,11 +26,6 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
         - uses: actions/checkout@v4
-
-        - name: "Garante que o gcc-10 e g++-10 estejam instalados"
-          run: |
-            sudo apt install gcc-10 g++-10
-            sudo update-alternatives --set gcc /usr/bin/gcc-10
 
         - run: sudo apt-get update
 
