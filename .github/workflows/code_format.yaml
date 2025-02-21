@@ -7,7 +7,7 @@ on:
 jobs:
   check_code_format:
     name: "Garante que o código esteja corretamente formatado"
-    runs-on: "ubuntu-latest"
+    runs-on: "ubuntu-22.04"
     steps:
       - uses: actions/checkout@v4
       - name: "Garante que o gcc-10 e g++-10 estejam instalados"
