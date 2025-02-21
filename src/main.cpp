@@ -10,8 +10,11 @@ using namespace Identidade::Enums;
 
 int main()
 {
-    auto* terreno = new Terreno(1000, 1000);
-    terreno->atualizeSolo(new Solo(10, 10, 10, 10, 10, 10, 10));
+    const auto TEST_THOUSAND = 1000;
+    const auto TEST_TEN = 10;
+    auto* terreno = new Terreno(TEST_THOUSAND, TEST_THOUSAND);
+    terreno->atualizeSolo(new Solo(
+        TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN));
 
     std::cout << "Hello World!\n";
 

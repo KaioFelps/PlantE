@@ -1,0 +1,44 @@
+name: Code Formatting
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check_code_format:
+    name: "Garante que o código esteja corretamente formatado"
+    runs-on: "ubuntu-22.04"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Instala clang-format"
+        run: sudo apt-get install -y clang-format-14
+
+      - name: "Confere a formatação recursivamente para todos os arquivos .cpp e .hpp"
+        run: find . \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-format --style=file:$GITHUB_WORKSPACE/.clang-format.yaml --Werror --dry-run {} +
+        
+  check_code_linting:
+    name: "Garante que o código esteja seguindo os padrões definidos na guia de contribuição"
+    runs-on: "ubuntu-latest"
+    steps:
+        - uses: actions/checkout@v4
+
+        - run: sudo apt-get update
+
+        - name: "Instala o bear"
+          run: sudo apt-get install bear
+
+        - name: "Instala o clang-tidy"
+          run: |
+            sudo apt-get install -y clang-tidy-14
+            clang-tidy --version
+
+        - name: "Configura o bear"
+          run: |
+            chmod +x ./tidy.sh
+            ./tidy.sh
+            ls ./build
+
+        - name: "Garante que os padrões de código exigidos estejam sendo seguidos"
+          run: find . \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-tidy --config-file=./.clang-tidy.yaml -p=./build --header-filter=.* --quiet --warnings-as-errors=* {} +
