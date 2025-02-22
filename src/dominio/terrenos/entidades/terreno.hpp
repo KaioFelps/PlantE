@@ -30,7 +30,7 @@ class Terreno
     unsigned int obtenhaLargura() const;
     unsigned int obtenhaComprimento() const;
     unsigned int obtenhaTamanho() const;
-    const std::optional<std::unique_ptr<Solo>>* obtenhaSolo() const;
+    const std::optional<std::unique_ptr<Solo>>& obtenhaSolo() const;
     Terrenos::Enums::ExposicaoSolar obtenhaExposicaoSolar() const;
     Terrenos::Enums::Clima obtenhaClima() const;
 
