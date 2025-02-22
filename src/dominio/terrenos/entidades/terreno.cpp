@@ -37,9 +37,9 @@ unsigned int Terreno::obtenhaTamanho() const
     return this->largura * this->comprimento;
 }
 
-const std::optional<std::unique_ptr<Solo>>* Terreno::obtenhaSolo() const
+const std::optional<std::unique_ptr<Solo>>& Terreno::obtenhaSolo() const
 {
-    return &this->solo;
+    return this->solo;
 }
 
 Terrenos::Enums::ExposicaoSolar Terreno::obtenhaExposicaoSolar() const
