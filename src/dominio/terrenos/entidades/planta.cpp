@@ -48,6 +48,11 @@ bool Planta::obtenhaAceitaVento() const
     return this->aceitaVento;
 }
 
+Terrenos::Enums::Clima Planta::obtenhaClima() const
+{
+    return this->clima;
+}
+
 void Planta::coloquePhIdeal(unsigned char phIdeal)
 {
     this->phIdeal = phIdeal;
@@ -76,6 +81,11 @@ void Planta::coloqueIndiceDeRetencaoDeAgua(unsigned char indiceDeRetencaoDeAgua)
 void Planta::coloqueAceitaVento(bool aceitaVento)
 {
     this->aceitaVento = aceitaVento;
+}
+
+void Planta::coloqueClima(Terrenos::Enums::Clima clima)
+{
+    this->clima = clima;
 }
 
 } // namespace Terrenos::Entidades
