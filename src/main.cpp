@@ -3,6 +3,7 @@
 #include "dominio/terrenos/entidades/terreno.hpp"
 #include <ctime>
 #include <iostream>
+#include <memory>
 
 using namespace Terrenos::Entidades;
 using namespace Identidade::Entidades;
@@ -13,8 +14,10 @@ int main()
     const auto TEST_THOUSAND = 1000;
     const auto TEST_TEN = 10;
     auto* terreno = new Terreno(TEST_THOUSAND, TEST_THOUSAND);
-    terreno->atualizeSolo(new Solo(
-        TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN));
+    unique_ptr<Solo> solo = make_unique<Solo>(
+        TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN);
+
+    terreno->atualizeSolo(move(solo));
 
     std::cout << "Hello World!\n";
 
