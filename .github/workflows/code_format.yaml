@@ -62,7 +62,7 @@ jobs:
             clang-tidy-14 --version
 
         - name: "Remove o campo HeaderFilter do arquivo .clang-tidy.yaml"
-          run: sed -i "HeaderFilter:/d" ./.clang-tidy.yaml
+          run: sed -i '/HeaderFilter:/d' ./.clang-tidy.yaml
 
         - name: "Garante que os padrões de código exigidos estejam sendo seguidos"
           run: find ./src/ \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-tidy-14 --config-file=./.clang-tidy.yaml -p=./build --header-filter=src/.*|include/.* --quiet --warnings-as-errors=* {} +
