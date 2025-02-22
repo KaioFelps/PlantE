@@ -50,6 +50,9 @@ inline std::ostream& operator<<(std::ostream& IODevice, const Clima& clima)
     case Clima::MONTANHA:
         IODevice << "Montanha";
         break;
+    case Clima::SUBTROPICAL:
+        IODevice << "Subtropical";
+        break;
     }
 
     return IODevice;
