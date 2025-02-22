@@ -3,7 +3,7 @@
 namespace Terrenos::Enums
 {
 
-enum ExposicaoSolar
+enum class ExposicaoSolar
 {
     SOL_PLENO,
     MEIA_SOMBRA,

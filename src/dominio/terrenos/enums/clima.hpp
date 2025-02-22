@@ -3,7 +3,7 @@
 namespace Terrenos::Enums
 {
 
-enum Clima
+enum class Clima
 {
     TROPICAL,
     TEMPERADO,
