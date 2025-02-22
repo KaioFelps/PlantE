@@ -5,6 +5,7 @@
 #include "./solo.hpp"
 #include <memory>
 #include <optional>
+#include <string>
 
 namespace Terrenos::Entidades
 {
@@ -12,6 +13,7 @@ namespace Terrenos::Entidades
 class Terreno
 {
   private:
+    std::string id;
     unsigned int largura;
     unsigned int comprimento;
     std::optional<std::unique_ptr<Solo>> solo;
@@ -24,6 +26,7 @@ class Terreno
             Terrenos::Enums::ExposicaoSolar exposicaoSolar,
             Terrenos::Enums::Clima clima);
 
+    const std::string& obtenhaId() const;
     unsigned int obtenhaLargura() const;
     unsigned int obtenhaComprimento() const;
     unsigned int obtenhaTamanho() const;

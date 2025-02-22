@@ -13,7 +13,10 @@ int main()
 {
     const auto TEST_THOUSAND = 1000;
     const auto TEST_TEN = 10;
-    auto* terreno = new Terreno(TEST_THOUSAND, TEST_THOUSAND);
+    auto* terreno = new Terreno(TEST_THOUSAND,
+                                TEST_THOUSAND,
+                                Terrenos::Enums::ExposicaoSolar::SOMBRA,
+                                Terrenos::Enums::Clima::SUBTROPICAL);
 
     std::unique_ptr<Solo> solo = std::make_unique<Solo>(
         TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN);
@@ -22,8 +25,9 @@ int main()
 
     std::cout << "Hello World!\n";
 
-    std::cout << "Tamanho do terreno: " << terreno->obtenhaTamanho() << "km²"
-              << std::endl;
+    std::cout << "Tamanho do terreno: " << terreno->obtenhaTamanho() << "km²\n";
+
+    std::cout << "ID do terreno: " << terreno->obtenhaId() << "\n";
 
     delete terreno;
 

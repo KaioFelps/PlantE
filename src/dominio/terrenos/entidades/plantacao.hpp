@@ -4,6 +4,7 @@
 #include <ctime>
 #include <memory>
 #include <optional>
+#include <string>
 
 namespace Terrenos::Entidades
 {
@@ -11,6 +12,7 @@ namespace Terrenos::Entidades
 class Plantacao
 {
   private:
+    std::string id;
     time_t dataDeInicio;
     std::optional<time_t> dataDeFinalizacao;
     std::optional<time_t> dataDeDesistencia;
@@ -21,6 +23,7 @@ class Plantacao
   public:
     Plantacao(std::unique_ptr<Planta> planta);
 
+    const std::string& obtenhaId() const;
     const time_t* obtenhaDataDeInicio() const;
     const std::optional<time_t>* obtenhaDataDeFinalizacao() const;
     const std::optional<time_t>* obtenhaDataDeDesistencia() const;
