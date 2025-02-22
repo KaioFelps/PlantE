@@ -2,8 +2,6 @@
 #include <chrono>
 #include <memory>
 
-using namespace std;
-
 namespace Terrenos::Entidades
 {
 
@@ -14,8 +12,8 @@ Plantacao::Plantacao(Planta* planta_)
 
 time_t Plantacao::obtenhaTempoAtual()
 {
-    auto now = chrono::system_clock::now();
-    auto nowTimeT = chrono::system_clock::to_time_t(now);
+    auto now = std::chrono::system_clock::now();
+    auto nowTimeT = std::chrono::system_clock::to_time_t(now);
     return nowTimeT;
 }
 

@@ -14,10 +14,11 @@ int main()
     const auto TEST_THOUSAND = 1000;
     const auto TEST_TEN = 10;
     auto* terreno = new Terreno(TEST_THOUSAND, TEST_THOUSAND);
-    unique_ptr<Solo> solo = make_unique<Solo>(
+
+    std::unique_ptr<Solo> solo = std::make_unique<Solo>(
         TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN);
 
-    terreno->atualizeSolo(move(solo));
+    terreno->atualizeSolo(std::move(solo));
 
     std::cout << "Hello World!\n";
 

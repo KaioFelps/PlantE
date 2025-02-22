@@ -23,12 +23,12 @@ unsigned int Terreno::obtenhaTamanho() const
     return this->largura * this->comprimento;
 }
 
-const optional<unique_ptr<Solo>>* Terreno::obtenhaSolo() const
+const std::optional<std::unique_ptr<Solo>>* Terreno::obtenhaSolo() const
 {
     return &this->solo;
 }
 
-void Terreno::atualizeSolo(unique_ptr<Solo> solo)
+void Terreno::atualizeSolo(std::unique_ptr<Solo> solo)
 {
     this->solo = std::move(solo);
 }
