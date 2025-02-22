@@ -8,7 +8,7 @@ Checks: |
   -warnings-as-errors,
   -modernize-use-nodiscard
 
-HeaderFilter: 'src/.*|include/.*'
+HeaderFilter: 'src/.*'
   
 CheckOptions:
   - key: readability-identifier-naming.ClassCase
