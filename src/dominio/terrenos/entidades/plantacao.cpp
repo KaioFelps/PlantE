@@ -5,8 +5,8 @@
 namespace Terrenos::Entidades
 {
 
-Plantacao::Plantacao(Planta* planta_)
-    : planta(planta_), dataDeInicio(Plantacao::obtenhaTempoAtual())
+Plantacao::Plantacao(std::unique_ptr<Planta> planta_)
+    : dataDeInicio(Plantacao::obtenhaTempoAtual()), planta(std::move(planta_))
 {
 }
 

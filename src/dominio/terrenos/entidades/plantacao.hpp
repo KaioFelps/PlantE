@@ -19,7 +19,7 @@ class Plantacao
     static time_t obtenhaTempoAtual();
 
   public:
-    Plantacao(Planta* planta);
+    Plantacao(std::unique_ptr<Planta> planta);
 
     const time_t* obtenhaDataDeInicio() const;
     const std::optional<time_t>* obtenhaDataDeFinalizacao() const;
