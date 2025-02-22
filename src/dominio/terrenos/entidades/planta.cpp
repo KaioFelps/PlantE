@@ -3,19 +3,19 @@
 namespace Terrenos::Entidades
 {
 
-Planta::Planta(unsigned char phIdeal,
-               unsigned char indiceDeNitrogenio,
-               unsigned char indiceDeFosforo,
-               unsigned char indiceDePotassio,
-               unsigned char indiceDeRetencaoDeAgua,
-               bool aceitaVento)
+Planta::Planta(unsigned char phIdeal_,
+               unsigned char indiceDeNitrogenio_,
+               unsigned char indiceDeFosforo_,
+               unsigned char indiceDePotassio_,
+               unsigned char indiceDeRetencaoDeAgua_,
+               bool aceitaVento_,
+               Terrenos::Enums::Clima clima_,
+               Terrenos::Enums::ExposicaoSolar exposicaoSolar_)
+    : phIdeal(phIdeal_), indiceDeNitrogenio(indiceDeNitrogenio_),
+      indiceDeFosforo(indiceDeFosforo_), indiceDePotassio(indiceDePotassio_),
+      indiceDeRetencaoDeAgua(indiceDeRetencaoDeAgua_),
+      aceitaVento(aceitaVento_), clima(clima_), exposicaoSolar(exposicaoSolar_)
 {
-    this->phIdeal = phIdeal;
-    this->indiceDeNitrogenio = indiceDeNitrogenio;
-    this->indiceDeFosforo = indiceDeFosforo;
-    this->indiceDePotassio = indiceDePotassio;
-    this->indiceDeRetencaoDeAgua = indiceDeRetencaoDeAgua;
-    this->aceitaVento = aceitaVento;
 }
 
 unsigned char Planta::obtenhaPhIdeal() const
