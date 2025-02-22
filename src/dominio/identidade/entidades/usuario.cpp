@@ -3,9 +3,9 @@
 namespace Identidade::Entidades
 {
 
-Usuario::Usuario(string nome,
-                 string email,
-                 string hashDaSeha,
+Usuario::Usuario(std::string nome,
+                 std::string email,
+                 std::string hashDaSeha,
                  time_t dataDeNascimento,
                  Cargo cargo)
 {
@@ -16,17 +16,17 @@ Usuario::Usuario(string nome,
     this->cargo = cargo;
 };
 
-const string* Usuario::obtenhaNome() const
+const std::string* Usuario::obtenhaNome() const
 {
     return &this->nome;
 }
 
-const string* Usuario::obtenhaEmail() const
+const std::string* Usuario::obtenhaEmail() const
 {
     return &this->email;
 }
 
-const string* Usuario::obtenhaHashDaSeha() const
+const std::string* Usuario::obtenhaHashDaSeha() const
 {
     return &this->hashDaSeha;
 }
@@ -41,17 +41,17 @@ const Cargo* Usuario::obtenhaCargo() const
     return &this->cargo;
 }
 
-void Usuario::coloqueNome(string nome)
+void Usuario::coloqueNome(std::string nome)
 {
     this->nome = nome;
 }
 
-void Usuario::coloqueEmail(string email)
+void Usuario::coloqueEmail(std::string email)
 {
     this->email = email;
 }
 
-void Usuario::coloqueHashDaSeha(string hashDaSeha)
+void Usuario::coloqueHashDaSeha(std::string hashDaSeha)
 {
     this->hashDaSeha = hashDaSeha;
 }
