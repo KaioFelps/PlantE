@@ -1,7 +1,7 @@
 namespace Identidade::Enums
 {
 
-enum Cargo
+enum class Cargo
 {
     USUARIO,
     MODERADOR,
