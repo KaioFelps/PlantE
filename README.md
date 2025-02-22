@@ -1,11 +1,21 @@
 # Plant&
 
+## Primeiros passos
+Para rodar o projeto, são necessárias ferramentas para baixar as dependências do sistema,
+vinculá-las, e compilar tudo.
+
+Siga o [Guia de Instalação] para instruções e referências de como configurar os softwares
+necessários para isso.
+
+[Guia de Instalação]: ./INSTALLATION_GUIDES.md
+
 ## Rodando a aplicação
-Digite no terminal:
+Observe que os primeiros passos são essenciais para rodar a aplicação. Se tudo estiver
+corretamente configurado, digite os seguintes comandos no seu terminal:
 
 ```bash
-# compila e roda a aplicação
-make run
+cmake --preset=default # configura o CMake utilizando o preset do vcpkg
+cmake --build build --target run # compila e roda a aplicação
 ```
 
 ## Contribuindo
