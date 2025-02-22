@@ -3,13 +3,13 @@
 namespace Terrenos::Entidades
 {
 
-Solo::Solo(unsigned char acidez_,
+Solo::Solo(double acidez_,
            unsigned char indiceDeMinerais_,
            unsigned char indiceDesalinidade_,
            unsigned char indiceDeArgila_,
            unsigned char indiceDeAreia_,
            unsigned char indiceDeSilite_,
-           unsigned char cargaEletrica_)
+           double cargaEletrica_)
     : acidez(acidez_), indiceDeMinerais(indiceDeMinerais_),
       indiceDesalinidade(indiceDesalinidade_), indiceDeArgila(indiceDeArgila_),
       indiceDeAreia(indiceDeAreia_), indiceDeSilite(indiceDeSilite_),
@@ -17,7 +17,7 @@ Solo::Solo(unsigned char acidez_,
 {
 }
 
-unsigned char Solo::obtenhaAcidez() const
+double Solo::obtenhaAcidez() const
 {
     return this->acidez;
 }
@@ -47,7 +47,7 @@ unsigned char Solo::obtenhaIndiceDeSilite() const
     return this->indiceDeSilite;
 }
 
-unsigned char Solo::obtenhaCargaEletrica() const
+double Solo::obtenhaCargaEletrica() const
 {
     return this->cargaEletrica;
 }
