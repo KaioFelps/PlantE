@@ -65,4 +65,4 @@ jobs:
           run: sed -i '/HeaderFilter:/d' ./.clang-tidy.yaml
 
         - name: "Garante que os padrões de código exigidos estejam sendo seguidos"
-          run: find ./src/ \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-tidy-14 --config-file=./.clang-tidy.yaml -p=./build --header-filter=src/.*|include/.* --quiet --warnings-as-errors=* {} +
+          run: find ./src/ \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-tidy-14 --config-file=./.clang-tidy.yaml -p=./build --header-filter=src/.* --quiet --warnings-as-errors=* {} +
