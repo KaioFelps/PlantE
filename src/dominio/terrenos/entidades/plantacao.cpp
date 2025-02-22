@@ -1,4 +1,5 @@
 #include "./plantacao.hpp"
+#include <boost/uuid.hpp>
 #include <chrono>
 #include <memory>
 
@@ -8,6 +9,10 @@ namespace Terrenos::Entidades
 Plantacao::Plantacao(std::unique_ptr<Planta> planta_)
     : dataDeInicio(Plantacao::obtenhaTempoAtual()), planta(std::move(planta_))
 {
+
+    boost::uuids::random_generator uuidGenerator;
+    std::string strUuid = boost::uuids::to_string(uuidGenerator());
+    this->id = std::move(strUuid);
 }
 
 time_t Plantacao::obtenhaTempoAtual()
@@ -15,6 +20,11 @@ time_t Plantacao::obtenhaTempoAtual()
     auto now = std::chrono::system_clock::now();
     auto nowTimeT = std::chrono::system_clock::to_time_t(now);
     return nowTimeT;
+}
+
+const std::string& Plantacao::obtenhaId() const
+{
+    return this->id;
 }
 
 const time_t* Plantacao::obtenhaDataDeInicio() const
