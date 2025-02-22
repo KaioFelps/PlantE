@@ -3,26 +3,41 @@
 Siga as instruções listadas neste documento para garantir a padronização do código fonte do sistema.
 
 ## Setup
-Antes de começar, instale as extensões necessárias para o desenvolvimento:  
+Antes de começar, instale as extensões e softwares necessários para o desenvolvimento:  
 1. Se estiver utilizando Windows, recomenda-se utilizar [WSL2] para compilar e rodar os arquivos C++;
 2. Instale o g++ (`sudo apt-get install g++`) para compilar e rodar o código;
 3. Instale a extensão [C/C++ Extension Pack] para obter intellisense ao programar com C++;
-4. Instale [clang-format] (`sudo apt-get install clang-format`) para formatar o código;
-5. Instale bear (`sudo apt-get install bear`) para gerar um banco de dados de compilação utilizando o Makefile;
-6. Instale clang-tidy (`sudo apt-get install clang-tidy`) para garantir os padrões do código.
+4. Instale o `cmake` (veja as [instruções de instalação do cmake]);
+5. Instale o vcpkg (veja as [instruções de instalação do vcpkg]);
+6. Instale [clang-format] (`sudo apt-get install clang-format-14`) para formatar o código;
+7. Instale clang-tidy (`sudo apt-get install clang-tidy-14`) para garantir os padrões do código.
 
-Por fim, rode os comandos abaixo para configurar o ambiente de desenvolvimento:
+### Configurando o cmake
+Para configurar o **cmake**, primeiro copie o json de exemplo com o comando abaixo.
 ```bash
-# gera o arquivo build/compile_commands.json
-# para que o clang-tidy possa analisar o código e formatá-lo
-./tidy.sh
-# copia as configurações das extensões
+cp CMakeUserPresets.example.json CMakeUserPresets.json
+```
+
+Abrindo o json, substitua o valor `"<path to vcpkg>"` do campo `"VCPKG_ROOT"` pelo caminho até o
+diretório que contém o binário do vcpkg. Exemplo: `"/opt/vcpkg"`.
+
+Se ainda não configurou o vcpkg, confira as [instruções de instalação do vcpkg].
+
+### Configurando a extensão do vscode
+Copie as configurações de exemplo para configurações reais utilizando o comando abaixo:
+```bash
 cp .vscode/settings.example.json .vscode/settings.json
 ```
+
+### Dependências e como rodar o projeto
+Confira as instruções do arquivo [README.md](./README.md) para instalar todas as bibliotecas necessárias
+e compilar a aplicação.
 
 [WSL2]: https://learn.microsoft.com/pt-br/windows/wsl/install
 [C/C++ Extension Pack]: https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack
 [clang-format]: https://terminalroot.com.br/2023/07/formate-seu-codigo-com-clang-format.html
+[instruções de instalação do cmake]: ./INSTALLATION_GUIDES.md#cmake
+[instruções de instalação do vcpkg]: ./INSTALLATION_GUIDES.md#vcpkg
 
 ## Padrões de código
 - Todos os nomes devem estar em **português**;
