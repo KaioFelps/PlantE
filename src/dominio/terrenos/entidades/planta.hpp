@@ -1,6 +1,7 @@
 #pragma once
 
 #include "dominio/terrenos/enums/clima.hpp"
+#include "dominio/terrenos/enums/exposicao_solar.hpp"
 
 namespace Terrenos::Entidades
 {
@@ -16,6 +17,7 @@ class Planta
     bool aceitaVento;
     // talvez, futuramente, seja interessante aceitar um vetor de climas aceitos
     Terrenos::Enums::Clima clima;
+    Terrenos::Enums::ExposicaoSolar exposicaoSolar;
 
   public:
     Planta(unsigned char phIdeal,
@@ -23,7 +25,9 @@ class Planta
            unsigned char indiceDeFosforo,
            unsigned char indiceDePotassio,
            unsigned char indiceDeRetencaoDeAgua,
-           bool aceitaVento);
+           bool aceitaVento,
+           Terrenos::Enums::Clima clima,
+           Terrenos::Enums::ExposicaoSolar exposicaoSolar);
 
     unsigned char obtenhaPhIdeal() const;
     unsigned char obtenhaIndiceDeNitrogenio() const;
@@ -32,6 +36,7 @@ class Planta
     unsigned char obtenhaIndiceDeRetencaoDeAgua() const;
     bool obtenhaAceitaVento() const;
     Terrenos::Enums::Clima obtenhaClima() const;
+    Terrenos::Enums::ExposicaoSolar obtenhaExposicaoSolar() const;
 
     void coloquePhIdeal(unsigned char phIdeal);
     void coloqueIndiceDeNitrogenio(unsigned char indiceDeNitrogenio);
@@ -40,6 +45,7 @@ class Planta
     void coloqueIndiceDeRetencaoDeAgua(unsigned char indiceDeRetencaoDeAgua);
     void coloqueAceitaVento(bool aceitaVento);
     void coloqueClima(Terrenos::Enums::Clima clima);
+    void coloqueExposicaoSolar(Terrenos::Enums::ExposicaoSolar exposicaoSolar);
 };
 
 } // namespace Terrenos::Entidades
