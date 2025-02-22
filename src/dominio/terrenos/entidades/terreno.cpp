@@ -52,6 +52,12 @@ Terrenos::Enums::Clima Terreno::obtenhaClima() const
     return this->clima;
 }
 
+const std::optional<std::shared_ptr<Plantacao>>&
+Terreno::obtenhaPlantacaoAtiva() const
+{
+    return this->plantacaoAtiva;
+}
+
 void Terreno::atualizeSolo(std::unique_ptr<Solo> solo)
 {
     this->solo = std::move(solo);
@@ -66,6 +72,47 @@ void Terreno::coloqueExposicaoSolar(
 void Terreno::coloqueClima(Terrenos::Enums::Clima clima)
 {
     this->clima = clima;
+}
+
+/// @brief Adiciona uma nova plantação ativa ao terreno.
+/// @param plantacao A plantação nova a ser associada com o terreno.
+/// @return
+/// - `true`, se corretamente adicionado.
+///
+/// - `false`, se já houver uma plantação
+///  associada ao terreno. Nesse caso, também imprime uma mensagem de alerta na
+///  saída de erro.
+bool Terreno::coloquePlantacaoAtiva(std::shared_ptr<Plantacao> plantacao)
+{
+    if (this->plantacaoAtiva.has_value())
+    {
+        std::cerr << "Já existe uma plantação ativa no Terreno de id "
+                  << this->id << ".\n";
+        return false;
+    }
+
+    this->plantacaoAtiva = std::move(plantacao);
+    return true;
+}
+
+void Terreno::finalizePlantacaoAtiva()
+{
+    if (this->plantacaoAtiva.has_value())
+    {
+        this->plantacaoAtiva.value()->finalize();
+    }
+
+    this->plantacaoAtiva.reset();
+}
+
+void Terreno::desistaDaPlantacaoAtiva()
+{
+    if (this->plantacaoAtiva.has_value())
+    {
+        this->plantacaoAtiva.value()->cancele();
+    }
+
+    this->plantacaoAtiva.reset();
 }
 
 } // namespace Terrenos::Entidades
