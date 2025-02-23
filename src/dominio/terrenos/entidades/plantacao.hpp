@@ -9,6 +9,11 @@
 
 namespace Terrenos::Entidades
 {
+class Terreno;
+}
+
+namespace Terrenos::Entidades
+{
 
 class Plantacao
 {
