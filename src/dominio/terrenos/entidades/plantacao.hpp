@@ -25,10 +25,10 @@ class Plantacao
     Plantacao(std::unique_ptr<Planta> planta, std::unique_ptr<Terreno> terreno);
 
     const std::string& obtenhaId() const;
-    const time_t* obtenhaDataDeInicio() const;
-    const std::optional<time_t>* obtenhaDataDeFinalizacao() const;
-    const std::optional<time_t>* obtenhaDataDeDesistencia() const;
-    const Planta* obtenhaPlanta() const;
+    const time_t& obtenhaDataDeInicio() const;
+    const std::optional<time_t>& obtenhaDataDeFinalizacao() const;
+    const std::optional<time_t>& obtenhaDataDeDesistencia() const;
+    const Planta& obtenhaPlanta() const;
     const Terreno& obtenhaTerreno() const;
 
     void finalize();
