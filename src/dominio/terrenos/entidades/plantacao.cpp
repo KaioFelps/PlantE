@@ -30,24 +30,24 @@ const std::string& Plantacao::obtenhaId() const
     return this->id;
 }
 
-const time_t* Plantacao::obtenhaDataDeInicio() const
+const time_t& Plantacao::obtenhaDataDeInicio() const
 {
-    return &this->dataDeInicio;
+    return this->dataDeInicio;
 }
 
-const std::optional<time_t>* Plantacao::obtenhaDataDeFinalizacao() const
+const std::optional<time_t>& Plantacao::obtenhaDataDeFinalizacao() const
 {
-    return &this->dataDeFinalizacao;
+    return this->dataDeFinalizacao;
 }
 
-const std::optional<time_t>* Plantacao::obtenhaDataDeDesistencia() const
+const std::optional<time_t>& Plantacao::obtenhaDataDeDesistencia() const
 {
-    return &this->dataDeDesistencia;
+    return this->dataDeDesistencia;
 }
 
-const Planta* Plantacao::obtenhaPlanta() const
+const Planta& Plantacao::obtenhaPlanta() const
 {
-    return this->planta.get();
+    return *this->planta;
 }
 
 const Terreno& Plantacao::obtenhaTerreno() const
