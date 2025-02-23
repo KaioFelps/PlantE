@@ -88,4 +88,10 @@ void Planta::coloqueClima(Terrenos::Enums::Clima clima)
     this->clima = clima;
 }
 
+void Planta::coloqueExposicaoSolar(
+    Terrenos::Enums::ExposicaoSolar exposicaoSolar)
+{
+    this->exposicaoSolar = exposicaoSolar;
+}
+
 } // namespace Terrenos::Entidades
