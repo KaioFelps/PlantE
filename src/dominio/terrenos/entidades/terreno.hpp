@@ -3,10 +3,15 @@
 #include "../enums/clima.hpp"
 #include "../enums/exposicao_solar.hpp"
 #include "./plantacao.hpp"
-#include "./solo.hpp"
+#include "solo.hpp"
 #include <memory>
 #include <optional>
 #include <string>
+
+namespace Terrenos::Entidades
+{
+class Plantacao;
+}
 
 namespace Terrenos::Entidades
 {
