@@ -1,4 +1,5 @@
 #include "./plantacao.hpp"
+#include "./terreno.hpp"
 #include <boost/uuid.hpp>
 #include <chrono>
 #include <memory>
@@ -6,8 +7,10 @@
 namespace Terrenos::Entidades
 {
 
-Plantacao::Plantacao(std::unique_ptr<Planta> planta_)
-    : dataDeInicio(Plantacao::obtenhaTempoAtual()), planta(std::move(planta_))
+Plantacao::Plantacao(std::unique_ptr<Planta> planta_,
+                     std::unique_ptr<Terreno> terreno)
+    : dataDeInicio(Plantacao::obtenhaTempoAtual()), planta(std::move(planta_)),
+      terreno(std::move(terreno))
 {
 
     boost::uuids::random_generator uuidGenerator;
@@ -45,6 +48,11 @@ const std::optional<time_t>* Plantacao::obtenhaDataDeDesistencia() const
 const Planta* Plantacao::obtenhaPlanta() const
 {
     return this->planta.get();
+}
+
+const Terreno& Plantacao::obtenhaTerreno() const
+{
+    return *this->terreno;
 }
 
 void Plantacao::cancele()
