@@ -1,6 +1,7 @@
 #pragma once
 
 #include "./planta.hpp"
+#include "./terreno.hpp"
 #include <ctime>
 #include <memory>
 #include <optional>
