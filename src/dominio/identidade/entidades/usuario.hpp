@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../enums/cargo.hpp"
+#include "dominio/identidade/enums/cargo.hpp"
+#include "dominio/moderacao/entidades/denunciavel.hpp"
 #include <ctime>
 #include <sstream>
 
@@ -9,7 +10,7 @@ using namespace Identidade::Enums;
 namespace Identidade::Entidades
 {
 
-class Usuario
+class Usuario : public Moderacao::Entidades::Denunciavel
 {
   private:
     std::string nome;
@@ -24,6 +25,9 @@ class Usuario
             std::string hashDaSeha,
             time_t dataDeNascimento,
             Cargo cargo);
+
+    const std::string& obtenhaId() const override;
+    Moderacao::Enums::TipoDoDenunciavel obtenhaTipo() const override;
 
     const std::string* obtenhaNome() const;
     const std::string* obtenhaEmail() const;

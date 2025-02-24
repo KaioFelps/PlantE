@@ -43,7 +43,7 @@ int main()
               << "; Nascido em: "
               << std::asctime(
                      std::localtime(usuario->obtenhaDataDeNascimento()))
-              << std::endl;
+              << "ID do Usuário: " << usuario->obtenhaId() << "\n";
 
     delete usuario;
 
