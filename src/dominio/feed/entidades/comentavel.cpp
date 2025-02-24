@@ -7,7 +7,7 @@ namespace Feed::Entidades
 Comentavel::Comentavel(std::string conteudo_,
                        Moderacao::Enums::TipoDoDenunciavel tipo)
     : Moderacao::Entidades::Denunciavel(tipo), conteudo(std::move(conteudo_)),
-      dataPublicacao(Comentavel::obtenhaDataAtual()), estaAtivo(true)
+      dataPublicacao(Comentavel::obtenhaDataAtual())
 
 {
 }

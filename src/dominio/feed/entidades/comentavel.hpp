@@ -15,7 +15,7 @@ class Comentavel : public Moderacao::Entidades::Denunciavel
     std::string conteudo;
     time_t dataPublicacao;
     std::optional<time_t> dataRemocao;
-    bool estaAtivo;
+    bool estaAtivo = true;
 
   private:
     static time_t obtenhaDataAtual();
