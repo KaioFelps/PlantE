@@ -11,6 +11,8 @@ class Denunciavel
     std::string id;
     Enums::TipoDoDenunciavel tipo;
 
+    Denunciavel(Enums::TipoDoDenunciavel tipo);
+
   public:
     virtual const std::string& obtenhaId() const = 0;
     virtual Enums::TipoDoDenunciavel obtenhaTipo() const = 0;
