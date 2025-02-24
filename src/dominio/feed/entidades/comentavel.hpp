@@ -29,7 +29,7 @@ class Comentavel : public Moderacao::Entidades::Denunciavel
     void desativar();
     void coloqueConteudo(std::string conteudo);
 
-    virtual ~Comentavel() = default;
+    virtual ~Comentavel() override = default;
 };
 
 } // namespace Feed::Entidades
