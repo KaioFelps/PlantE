@@ -1,5 +1,6 @@
 #pragma once
 
+#include "dominio/moderacao/enum/tipo_do_denunciavel.hpp"
 #include <string>
 
 namespace Moderacao::Entidades

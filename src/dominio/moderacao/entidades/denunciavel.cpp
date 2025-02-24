@@ -1,5 +1,4 @@
 #include "denunciavel.hpp"
-#include "dominio/moderacao/enum/tipo_do_denunciavel.hpp"
 #include <boost/uuid.hpp>
 
 namespace Moderacao::Entidades
