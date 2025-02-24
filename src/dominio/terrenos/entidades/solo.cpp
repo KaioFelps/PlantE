@@ -13,7 +13,7 @@ Solo::Solo(unsigned char acidez,
 {
     this->acidez = acidez;
     this->indiceDeMinerais = indiceDeMinerais;
-    this->indiceDesalinidade = indiceDesalinidade;
+    this->indiceDeSalinidade = indiceDesalinidade;
     this->indiceDeArgila = indiceDeArgila;
     this->indiceDeAreia = indiceDeAreia;
     this->indiceDeSilite = indiceDeSilite;
@@ -30,9 +30,9 @@ unsigned char Solo::obtenhaIndiceDeMinerais() const
     return this->indiceDeMinerais;
 }
 
-unsigned char Solo::obtenhaIndiceDesalinidade() const
+unsigned char Solo::obtenhaIndiceDeSalinidade() const
 {
-    return this->indiceDesalinidade;
+    return this->indiceDeSalinidade;
 }
 
 unsigned char Solo::obtenhaIndiceDeArgila() const
