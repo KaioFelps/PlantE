@@ -3,9 +3,22 @@
 namespace Feed::Entidades
 {
 
-Comentario::Comentario(std::string conteudo)
-    : Comentavel(conteudo, Moderacao::Enums::TipoDoDenunciavel::COMENTARIO)
+Comentario::Comentario(std::shared_ptr<Identidade::Entidades::Usuario> autor_,
+                       std::shared_ptr<Postagem> postagem_,
+                       std::string conteudo_)
+    : Comentavel(conteudo, Moderacao::Enums::TipoDoDenunciavel::COMENTARIO),
+      autor(autor_), postagem(postagem_)
 {
+}
+
+const Postagem& Comentario::obtenhaPostagem() const
+{
+    return *this->postagem;
+}
+
+const Identidade::Entidades::Usuario& Comentario::obtenhaAutor() const
+{
+    return *this->autor;
 }
 
 } // namespace Feed::Entidades
