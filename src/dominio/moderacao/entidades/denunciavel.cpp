@@ -11,4 +11,14 @@ Denunciavel::Denunciavel(Enums::TipoDoDenunciavel tipo_) : tipo(tipo_)
     this->id = std::move(strUuid);
 }
 
+const std::string& Denunciavel::obtenhaId() const
+{
+    return this->id;
+}
+
+Moderacao::Enums::TipoDoDenunciavel Denunciavel::obtenhaTipo() const
+{
+    return this->tipo;
+}
+
 } // namespace Moderacao::Entidades
