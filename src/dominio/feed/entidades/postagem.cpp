@@ -2,9 +2,11 @@
 
 namespace Feed::Entidades
 {
-Postagem::Postagem(std::string titulo_, std::string conteudo_)
+Postagem::Postagem(std::shared_ptr<Identidade::Entidades::Usuario> autor_,
+                   std::string titulo_,
+                   std::string conteudo_)
     : Comentavel(conteudo_, Moderacao::Enums::TipoDoDenunciavel::POSTAGEM),
-      titulo(titulo_)
+      autor(autor_), titulo(titulo_)
 {
 }
 
