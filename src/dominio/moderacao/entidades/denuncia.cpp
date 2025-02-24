@@ -7,10 +7,10 @@ namespace Moderacao::Entidades
 Denuncia::Denuncia(std::optional<std::string> detalhes_,
                    Enums::MotivoDaDenuncia motivo_,
                    Enums::EstadoDaDenuncia estado_,
-                   Identidade::Entidades::Usuario relator_,
+                   std::shared_ptr<Identidade::Entidades::Usuario> relator_,
                    std::shared_ptr<Denunciavel> denunciavel_)
-    : detalhes(detalhes_), motivo(motivo_), estado(estado_), relator(relator_),
-      denunciavel(denunciavel_)
+    : detalhes(std::move(detalhes_)), motivo(motivo_), estado(estado_),
+      relator(relator_), denunciavel(std::move(denunciavel_))
 {
     boost::uuids::random_generator uuidGenerator;
     std::string strUuid = boost::uuids::to_string(uuidGenerator());
@@ -39,7 +39,7 @@ Enums::EstadoDaDenuncia Denuncia::obtenhaEstado() const
 
 const Identidade::Entidades::Usuario& Denuncia::obtenhaRelator() const
 {
-    return this->relator;
+    return *this->relator;
 }
 
 const std::optional<std::shared_ptr<Identidade::Entidades::Usuario>>&
@@ -54,9 +54,9 @@ Denuncia::obtenhaModeradorResolutor() const
     return this->moderadorResolutor;
 }
 
-const std::shared_ptr<Denunciavel>& Denuncia::obtenhaDenunciavel() const
+const Denunciavel& Denuncia::obtenhaDenunciavel() const
 {
-    return this->denunciavel;
+    return *this->denunciavel;
 }
 
 // setters
