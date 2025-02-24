@@ -18,7 +18,7 @@ class Denuncia
     std::optional<std::string> detalhes;
     Enums::MotivoDaDenuncia motivo;
     Enums::EstadoDaDenuncia estado;
-    Identidade::Entidades::Usuario relator;
+    std::shared_ptr<Identidade::Entidades::Usuario> relator;
 
     std::optional<std::shared_ptr<Identidade::Entidades::Usuario>>
         moderadorInvestigador;
@@ -32,7 +32,7 @@ class Denuncia
     Denuncia(std::optional<std::string> detalhes,
              Enums::MotivoDaDenuncia motivo,
              Enums::EstadoDaDenuncia estado,
-             Identidade::Entidades::Usuario relator,
+             std::shared_ptr<Identidade::Entidades::Usuario> relator,
              std::shared_ptr<Denunciavel> denunciavel);
 
     void coloqueEstado(Enums::EstadoDaDenuncia estado);
@@ -51,7 +51,7 @@ class Denuncia
     const std::optional<std::shared_ptr<Identidade::Entidades::Usuario>>&
     obtenhaModeradorResolutor() const;
 
-    const std::shared_ptr<Denunciavel>& obtenhaDenunciavel() const;
+    const Denunciavel& obtenhaDenunciavel() const;
 
     // setters
     void coloqueEstado(Enums::EstadoDaDenuncia estado);
