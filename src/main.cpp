@@ -1,5 +1,5 @@
 #include "dominio/identidade/entidades/usuario.hpp"
-//#include "dominio/terrenos/entidades/solo.hpp"
+#include "dominio/terrenos/entidades/solo.hpp"
 #include "dominio/terrenos/entidades/terreno.hpp"
 #include "login.hpp"
 #include <ctime>
@@ -22,7 +22,7 @@ int main()
     string email, hashDaSenha;
     cout << "Digite o email: ";
     cin >> email;
-    cout << "Digite o hash da senha: ";
+    cout << "Digite a senha: ";
     cin >> hashDaSenha;
  
     if (fazerLogin(usuarios, email, hashDaSenha))
@@ -63,7 +63,7 @@ int main()
         }
         else
         {
-            cout << "Ok, você escolheu não ver o terreno." << endl;
+            cout << "Ok, informações do terreno não serão exibidas." << endl;
         }
     }
     else
