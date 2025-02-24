@@ -35,8 +35,6 @@ class Denuncia
              std::shared_ptr<Identidade::Entidades::Usuario> relator,
              std::shared_ptr<Denunciavel> denunciavel);
 
-    void coloqueEstado(Enums::EstadoDaDenuncia estado);
-
     // getters
     const std::string& obtenhaId() const;
     const std::optional<std::string>& obtenhaDetalhes() const;
