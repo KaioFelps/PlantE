@@ -20,4 +20,9 @@ void Postagem::coloqueTitulo(std::string titulo)
     this->titulo = std::move(titulo);
 }
 
+const Identidade::Entidades::Usuario& Postagem::obtenhaAutor() const
+{
+    return *this->autor;
+}
+
 } // namespace Feed::Entidades

@@ -19,6 +19,7 @@ class Postagem : public Comentavel
              std::string titulo,
              std::string conteudo);
 
+    const Identidade::Entidades::Usuario& obtenhaAutor() const;
     const std::string& obtenhaTitulo() const;
     void coloqueTitulo(std::string titulo);
 };
