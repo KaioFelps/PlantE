@@ -26,9 +26,6 @@ class Usuario : public Moderacao::Entidades::Denunciavel
             time_t dataDeNascimento,
             Cargo cargo);
 
-    const std::string& obtenhaId() const override;
-    Moderacao::Enums::TipoDoDenunciavel obtenhaTipo() const override;
-
     const std::string* obtenhaNome() const;
     const std::string* obtenhaEmail() const;
     const std::string* obtenhaHashDaSeha() const;

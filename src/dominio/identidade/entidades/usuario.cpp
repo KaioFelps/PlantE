@@ -15,15 +15,6 @@ Usuario::Usuario(std::string nome_,
 {
 }
 
-const std::string& Usuario::obtenhaId() const
-{
-    return this->id;
-}
-Moderacao::Enums::TipoDoDenunciavel Usuario::obtenhaTipo() const
-{
-    return this->tipo;
-}
-
 const std::string* Usuario::obtenhaNome() const
 {
     return &this->nome;
