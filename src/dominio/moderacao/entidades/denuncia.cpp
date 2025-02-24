@@ -10,7 +10,7 @@ Denuncia::Denuncia(std::optional<std::string> detalhes_,
                    std::shared_ptr<Identidade::Entidades::Usuario> relator_,
                    std::shared_ptr<Denunciavel> denunciavel_)
     : detalhes(std::move(detalhes_)), motivo(motivo_), estado(estado_),
-      relator(relator_), denunciavel(std::move(denunciavel_))
+      relator(std::move(relator_)), denunciavel(std::move(denunciavel_))
 {
     boost::uuids::random_generator uuidGenerator;
     std::string strUuid = boost::uuids::to_string(uuidGenerator());
