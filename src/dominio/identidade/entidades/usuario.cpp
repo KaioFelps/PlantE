@@ -3,18 +3,26 @@
 namespace Identidade::Entidades
 {
 
-Usuario::Usuario(std::string nome,
-                 std::string email,
-                 std::string hashDaSeha,
-                 time_t dataDeNascimento,
-                 Cargo cargo)
+Usuario::Usuario(std::string nome_,
+                 std::string email_,
+                 std::string hashDaSeha_,
+                 time_t dataDeNascimento_,
+                 Cargo cargo_)
+    : Denunciavel(Moderacao::Enums::TipoDoDenunciavel::USUARIO),
+      nome(std::move(nome_)), email(std::move(email_)),
+      hashDaSeha(std::move(hashDaSeha_)), dataDeNascimento(dataDeNascimento_),
+      cargo(cargo_)
 {
-    this->nome = nome;
-    this->email = email;
-    this->hashDaSeha = hashDaSeha;
-    this->dataDeNascimento = dataDeNascimento;
-    this->cargo = cargo;
-};
+}
+
+const std::string& Usuario::obtenhaId() const
+{
+    return this->id;
+}
+Moderacao::Enums::TipoDoDenunciavel Usuario::obtenhaTipo() const
+{
+    return this->tipo;
+}
 
 const std::string* Usuario::obtenhaNome() const
 {
