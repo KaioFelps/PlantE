@@ -1,3 +1,5 @@
+#pragma once
+
 #include "comentavel.hpp"
 #include "dominio/identidade/entidades/usuario.hpp"
 #include <memory>

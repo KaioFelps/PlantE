@@ -1,3 +1,5 @@
+#pragma once
+
 #include "dominio/moderacao/entidades/denunciavel.hpp"
 #include <optional>
 #include <string>
