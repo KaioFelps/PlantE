@@ -7,7 +7,7 @@ Comentario::Comentario(std::shared_ptr<Identidade::Entidades::Usuario> autor_,
                        std::shared_ptr<Postagem> postagem_,
                        std::string conteudo_)
     : Comentavel(conteudo, Moderacao::Enums::TipoDoDenunciavel::COMENTARIO),
-      autor(autor_), postagem(postagem_)
+      autor(std::move(autor_)), postagem(std::move(postagem_))
 {
 }
 
