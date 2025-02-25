@@ -1,5 +1,6 @@
 #include "./plantacao.hpp"
 #include "./terreno.hpp"
+#include "util/datas.hpp"
 #include "util/id.hpp"
 #include <chrono>
 #include <memory>
@@ -10,16 +11,9 @@ namespace Terrenos::Entidades
 Plantacao::Plantacao(std::unique_ptr<Planta> planta_,
                      std::unique_ptr<Terreno> terreno)
     : id(Utils::GeradorDeId::gerarUUID()),
-      dataDeInicio(Plantacao::obtenhaTempoAtual()), planta(std::move(planta_)),
-      terreno(std::move(terreno))
+      dataDeInicio(Utils::DataHora::obtenhaDataHoraAtual()),
+      planta(std::move(planta_)), terreno(std::move(terreno))
 {
-}
-
-time_t Plantacao::obtenhaTempoAtual()
-{
-    auto now = std::chrono::system_clock::now();
-    auto nowTimeT = std::chrono::system_clock::to_time_t(now);
-    return nowTimeT;
 }
 
 const std::string& Plantacao::obtenhaId() const
@@ -54,12 +48,12 @@ const Terreno& Plantacao::obtenhaTerreno() const
 
 void Plantacao::cancele()
 {
-    this->dataDeDesistencia = Plantacao::obtenhaTempoAtual();
+    this->dataDeDesistencia = Utils::DataHora::obtenhaDataHoraAtual();
 }
 
 void Plantacao::finalize()
 {
-    this->dataDeFinalizacao = Plantacao::obtenhaTempoAtual();
+    this->dataDeFinalizacao = Utils::DataHora::obtenhaDataHoraAtual();
 }
 
 } // namespace Terrenos::Entidades

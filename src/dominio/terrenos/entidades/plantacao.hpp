@@ -25,8 +25,6 @@ class Plantacao
     std::unique_ptr<Planta> planta;
     std::unique_ptr<Terreno> terreno;
 
-    static time_t obtenhaTempoAtual();
-
   public:
     Plantacao(std::unique_ptr<Planta> planta, std::unique_ptr<Terreno> terreno);
 
