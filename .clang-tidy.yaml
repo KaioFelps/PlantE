@@ -8,8 +8,6 @@ Checks: |
   -warnings-as-errors,
   -modernize-use-nodiscard
 
-HeaderFilter: 'src/.*'
-  
 CheckOptions:
   - key: readability-identifier-naming.ClassCase
     value: CamelCase
