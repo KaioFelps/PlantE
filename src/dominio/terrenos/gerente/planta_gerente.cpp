@@ -1,1 +1,0 @@
-#include "./planta_gerente.hpp"

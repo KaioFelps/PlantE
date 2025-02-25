@@ -1,1 +1,0 @@
-#include "./usuario_gerente.hpp"

@@ -1,1 +1,0 @@
-#include "./solo_gerente.hpp"
