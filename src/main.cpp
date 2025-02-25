@@ -1,6 +1,7 @@
 #include "dominio/identidade/entidades/usuario.hpp"
 #include "dominio/terrenos/entidades/solo.hpp"
 #include "dominio/terrenos/entidades/terreno.hpp"
+#include "globais.hpp"
 #include <ctime>
 #include <iostream>
 #include <memory>
@@ -9,8 +10,14 @@ using namespace Terrenos::Entidades;
 using namespace Identidade::Entidades;
 using namespace Identidade::Enums;
 
-int main()
+int main(int argc, char* argv[])
 {
+    if (argc >= 2 && std::string_view(argv[ 1 ]) == "--seed")
+    {
+        std::cout << "Populando os armazenamentos em memória...\n";
+        Daos::EmMemoria::Globais::popular();
+    }
+
     const auto TEST_THOUSAND = 1000;
     const auto TEST_TEN = 10;
     auto* terreno = new Terreno(TEST_THOUSAND,
