@@ -1,4 +1,5 @@
 #include "./planta.hpp"
+#include "util/id.hpp"
 
 namespace Terrenos::Entidades
 {
@@ -11,11 +12,17 @@ Planta::Planta(unsigned char phIdeal_,
                bool aceitaVento_,
                Terrenos::Enums::Clima clima_,
                Terrenos::Enums::ExposicaoSolar exposicaoSolar_)
-    : phIdeal(phIdeal_), indiceDeNitrogenio(indiceDeNitrogenio_),
+    : id(Utils::GeradorDeId::gerarUUID()), phIdeal(phIdeal_),
+      indiceDeNitrogenio(indiceDeNitrogenio_),
       indiceDeFosforo(indiceDeFosforo_), indiceDePotassio(indiceDePotassio_),
       indiceDeRetencaoDeAgua(indiceDeRetencaoDeAgua_),
       aceitaVento(aceitaVento_), clima(clima_), exposicaoSolar(exposicaoSolar_)
 {
+}
+
+const std::string& Planta::obtenhaId() const
+{
+    return this->id;
 }
 
 unsigned char Planta::obtenhaPhIdeal() const
