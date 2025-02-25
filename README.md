@@ -13,9 +13,10 @@ necessários para isso.
 Observe que os primeiros passos são essenciais para rodar a aplicação. Se tudo estiver
 corretamente configurado, digite os seguintes comandos no seu terminal:
 
-```bash
+```shell
 cmake --preset=default # configura o CMake utilizando o preset do vcpkg
-cmake --build build --target run # compila e roda a aplicação
+cmake --build build # compila e roda a aplicação
+./build/PlantE --seed # a flag seed pré-popula todos os vetores de armazenamento dos DAOs
 ```
 
 ## Contribuindo
