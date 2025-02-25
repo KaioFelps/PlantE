@@ -1,5 +1,5 @@
 #include "./terreno.hpp"
-#include <boost/uuid.hpp>
+#include "util/id.hpp"
 #include <iostream>
 
 namespace Terrenos::Entidades
@@ -9,12 +9,9 @@ Terreno::Terreno(unsigned int largura_,
                  unsigned int comprimento_,
                  Terrenos::Enums::ExposicaoSolar exposicaoSolar_,
                  Terrenos::Enums::Clima clima_)
-    : largura(largura_), comprimento(comprimento_),
-      exposicaoSolar(exposicaoSolar_), clima(clima_)
+    : id(Utils::GeradorDeId::gerarUUID()), largura(largura_),
+      comprimento(comprimento_), exposicaoSolar(exposicaoSolar_), clima(clima_)
 {
-    boost::uuids::random_generator uuidGenerator;
-    std::string strUuid = boost::uuids::to_string(uuidGenerator());
-    this->id = std::move(strUuid);
 }
 
 const std::string& Terreno::obtenhaId() const
