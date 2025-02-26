@@ -1,4 +1,5 @@
 #include "roteador.hpp"
+#include "util/strings.hpp"
 #include <iostream>
 
 namespace Roteador
@@ -25,13 +26,16 @@ const HandlerFunction& Rota::obtenhaHandler() const
 
 void Aplicativo::listeAsRotas()
 {
-    std::cout << "Listando todas as rotas registradas:\n";
+    std::cout << "Listando todas as rotas registradas:\n\n";
 
     for (const auto& pares : this->rotas)
     {
         std::cout << "[" << pares.first << "] " << pares.second->obtenhaNome()
                   << "\n";
     }
+
+    std::cout << "\nPara acessar uma funcionalidade, digite o código entre os "
+                 "colchetes.\n";
 }
 
 void Aplicativo::registrarRota(std::string chave,
@@ -65,6 +69,43 @@ void Aplicativo::executarRota(std::string& chave)
 
     const auto* handler = &rota->second->obtenhaHandler();
     (*handler)(*this->contexto);
+}
+
+void Aplicativo::exibaMensagemPadrao()
+{
+    this->listeAsRotas();
+    std::cout << "Digite \"sair\" para encerrar a sessão.\n> ";
+}
+
+void Aplicativo::rodar()
+{
+    this->exibaMensagemPadrao();
+    while (true)
+    {
+        std::string input;
+        std::cin >> input;
+
+        Utils::Strings::apararInicio(input);
+        Utils::Strings::apararFinal(input);
+
+        if (input == "sair")
+        {
+            break;
+        }
+
+        if (input == "voltar")
+        {
+            std::cout << "\033[2J\033[H";
+            this->exibaMensagemPadrao();
+
+            continue;
+        }
+
+        this->executarRota(input);
+
+        std::cout << "Digite \"sair\" para encerrar a sessão. Digite "
+                     "\"voltar\" para voltar ao menu.\n> ";
+    }
 }
 
 } // namespace Roteador
