@@ -1,14 +1,19 @@
 #include "dominio/identidade/entidades/usuario.hpp"
+#include "dominio/terrenos/dao/plantas_dao.hpp"
 #include "dominio/terrenos/entidades/solo.hpp"
 #include "dominio/terrenos/entidades/terreno.hpp"
 #include "globais.hpp"
+#include "infra/dao/em_memoria/plantas_dao_em_memoria.hpp"
+#include "roteador.hpp"
+#include "util/datas.hpp"
 #include <ctime>
 #include <iostream>
-#include <memory>
 
 using namespace Terrenos::Entidades;
+using namespace Terrenos::Dao;
 using namespace Identidade::Entidades;
 using namespace Identidade::Enums;
+using namespace Daos::EmMemoria;
 
 int main(int argc, char* argv[])
 {
@@ -18,41 +23,37 @@ int main(int argc, char* argv[])
         Daos::EmMemoria::Globais::popular();
     }
 
-    const auto TEST_THOUSAND = 1000;
-    const auto TEST_TEN = 10;
-    auto* terreno = new Terreno(TEST_THOUSAND,
-                                TEST_THOUSAND,
-                                Terrenos::Enums::ExposicaoSolar::SOMBRA,
-                                Terrenos::Enums::Clima::SUBTROPICAL);
+    // não há tempo o bastante para implementar toda a parte do login
+    auto usuario =
+        std::make_shared<Usuario>("John Doe",
+                                  "johndoe@gmail.com",
+                                  "12345678",
+                                  Utils::DataHora::obtenhaDataHoraAtual(),
+                                  Identidade::Enums::Cargo::USUARIO);
 
-    std::unique_ptr<Solo> solo = std::make_unique<Solo>(
-        TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN);
+    Roteador::Aplicativo aplicativo;
 
-    terreno->atualizeSolo(std::move(solo));
+    std::shared_ptr<PlantasDao> plantasDao =
+        std::make_shared<PlantasDaoEmMemoria>();
 
-    std::cout << "Hello World!\n";
+    auto contexto = aplicativo.obtenhaContextoMutavel();
+    contexto->coloque(plantasDao);
+    contexto->coloque(usuario);
 
-    std::cout << "Tamanho do terreno: " << terreno->obtenhaTamanho() << "km²\n";
+    aplicativo.registrarRota("obter-sugestao-de-replantio",
+                             "Obter sugestão de replantio",
+                             [](const Roteador::Contexto& contexto)
+                             {
+                                 std::shared_ptr<PlantasDao> plantasDao =
+                                     contexto.obtenha<PlantasDao>();
 
-    std::cout << "ID do terreno: " << terreno->obtenhaId() << "\n";
+                                 auto usuario = contexto.obtenha<Usuario>();
+                                 std::cout
+                                     << "Usuario: " << *usuario->obtenhaNome()
+                                     << ".\n";
+                             });
 
-    delete terreno;
+    aplicativo.rodar();
 
-    auto* usuario = new Usuario("John Doe",
-                                "johndoe@gmail.com",
-                                "senha-hasheada",
-                                time(nullptr),
-                                Cargo::ADMINISTRADOR);
-
-    std::cout << "Usuário: " << *usuario->obtenhaNome()
-              << "; Cargo: " << *usuario->obtenhaCargo()
-
-              << "; Nascido em: "
-              << std::asctime(
-                     std::localtime(usuario->obtenhaDataDeNascimento()))
-              << "ID do Usuário: " << usuario->obtenhaId() << "\n";
-
-    delete usuario;
-
-    return 0;
+    return EXIT_SUCCESS;
 }
