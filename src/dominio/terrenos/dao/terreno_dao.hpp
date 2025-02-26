@@ -27,11 +27,11 @@ class TerrenoDao
       float cargaElétrica
     ) = 0;
 
-    virtual std::optional<std::shared_ptr<Terrenos::Entidades::Terreno>>
-    salve(Terreno terreno) = 0;
+    virtual void
+    salve(Terrenos::Entidades::Terreno terreno) = 0;
 
     virtual std::optional<std::shared_ptr<Identidade::Entidades::Usuario>>
-    listeTodosDoUsuário(Usuario usuario) = 0;
+    listeTodosDoUsuário(Identidade::Entidades::Usuario usuario) = 0;
 };
 
 } // namespace Terrenos::Dao
