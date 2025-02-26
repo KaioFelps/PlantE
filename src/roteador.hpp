@@ -67,6 +67,7 @@ class Aplicativo
   private:
     std::unordered_map<std::string, std::unique_ptr<Rota>> rotas;
     std::shared_ptr<Contexto> contexto;
+    void exibaMensagemPadrao();
 
   public:
     Aplicativo();
@@ -78,6 +79,8 @@ class Aplicativo
 
     std::shared_ptr<Contexto> obtenhaContextoMutavel();
     std::shared_ptr<Contexto> obtenhaContexto() const;
+
+    void rodar();
 };
 
 } // namespace Roteador
