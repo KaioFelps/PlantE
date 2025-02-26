@@ -1,16 +1,17 @@
+#include "dominio/identidade/dao/usuarios_dao.hpp"
 #include "dominio/identidade/entidades/usuario.hpp"
 #include "dominio/terrenos/dao/plantas_dao.hpp"
 #include "dominio/terrenos/entidades/solo.hpp"
 #include "dominio/terrenos/entidades/terreno.hpp"
 #include "globais.hpp"
 #include "infra/dao/em_memoria/plantas_dao_em_memoria.hpp"
+#include "infra/dao/em_memoria/usuarios_dao_em_memoria.hpp"
 #include "roteador.hpp"
 #include "util/datas.hpp"
 #include <ctime>
 #include <iostream>
 
 using namespace Terrenos::Entidades;
-using namespace Terrenos::Dao;
 using namespace Identidade::Entidades;
 using namespace Identidade::Enums;
 using namespace Daos::EmMemoria;
@@ -33,25 +34,29 @@ int main(int argc, char* argv[])
 
     Roteador::Aplicativo aplicativo;
 
-    std::shared_ptr<PlantasDao> plantasDao =
+    std::shared_ptr<Terrenos::Dao::PlantasDao> plantasDao =
         std::make_shared<PlantasDaoEmMemoria>();
+
+    std::shared_ptr<Identidade::Dao::UsuariosDao> usuariosDao =
+        std::make_shared<UsuariosDaoEmMemoria>();
+
+    usuariosDao->coloque(usuario);
 
     auto contexto = aplicativo.obtenhaContextoMutavel();
     contexto->coloque(plantasDao);
     contexto->coloque(usuario);
 
-    aplicativo.registrarRota("obter-sugestao-de-replantio",
-                             "Obter sugestão de replantio",
-                             [](const Roteador::Contexto& contexto)
-                             {
-                                 std::shared_ptr<PlantasDao> plantasDao =
-                                     contexto.obtenha<PlantasDao>();
+    aplicativo.registrarRota(
+        "obter-sugestao-de-replantio",
+        "Obter sugestão de replantio",
+        [](const Roteador::Contexto& contexto)
+        {
+            std::shared_ptr<Terrenos::Dao::PlantasDao> plantasDao =
+                contexto.obtenha<Terrenos::Dao::PlantasDao>();
 
-                                 auto usuario = contexto.obtenha<Usuario>();
-                                 std::cout
-                                     << "Usuario: " << *usuario->obtenhaNome()
-                                     << ".\n";
-                             });
+            auto usuario = contexto.obtenha<Usuario>();
+            std::cout << "Usuario: " << *usuario->obtenhaNome() << ".\n";
+        });
 
     aplicativo.rodar();
 
