@@ -9,6 +9,7 @@ namespace Terrenos::Entidades
 class Planta
 {
   private:
+    std::string id;
     unsigned char phIdeal;
     unsigned char indiceDeNitrogenio;
     unsigned char indiceDeFosforo;
@@ -29,6 +30,7 @@ class Planta
            Terrenos::Enums::Clima clima,
            Terrenos::Enums::ExposicaoSolar exposicaoSolar);
 
+    const std::string& obtenhaId() const;
     unsigned char obtenhaPhIdeal() const;
     unsigned char obtenhaIndiceDeNitrogenio() const;
     unsigned char obtenhaIndiceDeFosforo() const;

@@ -1,51 +1,70 @@
+#include "dominio/identidade/dao/usuarios_dao.hpp"
 #include "dominio/identidade/entidades/usuario.hpp"
+#include "dominio/moderacao/dao/denuncias_dao.hpp"
+#include "dominio/terrenos/dao/plantas_dao.hpp"
 #include "dominio/terrenos/entidades/solo.hpp"
 #include "dominio/terrenos/entidades/terreno.hpp"
+#include "globais.hpp"
+#include "infra/dao/em_memoria/denuncias_dao_em_memoria.hpp"
+#include "infra/dao/em_memoria/plantas_dao_em_memoria.hpp"
+#include "infra/dao/em_memoria/usuarios_dao_em_memoria.hpp"
+#include "roteador.hpp"
+#include "util/datas.hpp"
 #include <ctime>
 #include <iostream>
-#include <memory>
 
-using namespace Terrenos::Entidades;
-using namespace Identidade::Entidades;
-using namespace Identidade::Enums;
-
-int main()
+int main(int argc, char* argv[])
 {
-    const auto TEST_THOUSAND = 1000;
-    const auto TEST_TEN = 10;
-    auto* terreno = new Terreno(TEST_THOUSAND,
-                                TEST_THOUSAND,
-                                Terrenos::Enums::ExposicaoSolar::SOMBRA,
-                                Terrenos::Enums::Clima::SUBTROPICAL);
+    using namespace Terrenos::Entidades;
+    using namespace Identidade::Entidades;
+    using namespace Identidade::Dao;
+    using namespace Terrenos::Dao;
+    using namespace Identidade::Enums;
+    using namespace Daos::EmMemoria;
+    using namespace Moderacao::Dao;
 
-    std::unique_ptr<Solo> solo = std::make_unique<Solo>(
-        TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN, TEST_TEN);
+    if (argc >= 2 && std::string_view(argv[ 1 ]) == "--seed")
+    {
+        std::cout << "Populando os armazenamentos em memória...\n";
+        Daos::EmMemoria::Globais::popular();
+    }
 
-    terreno->atualizeSolo(std::move(solo));
+    // não há tempo o bastante para implementar toda a parte do login
+    auto usuario =
+        std::make_shared<Usuario>("John Doe",
+                                  "johndoe@gmail.com",
+                                  "12345678",
+                                  Utils::DataHora::obtenhaDataHoraAtual(),
+                                  Identidade::Enums::Cargo::USUARIO);
 
-    std::cout << "Hello World!\n";
+    Roteador::Aplicativo aplicativo;
 
-    std::cout << "Tamanho do terreno: " << terreno->obtenhaTamanho() << "km²\n";
+    auto plantasDao = std::make_shared<PlantasDaoEmMemoria>();
+    auto usuariosDao = std::make_shared<UsuariosDaoEmMemoria>();
+    auto denunciasDao = std::make_shared<DenunciasDaoEmMemoria>();
 
-    std::cout << "ID do terreno: " << terreno->obtenhaId() << "\n";
+    usuariosDao->coloque(usuario);
 
-    delete terreno;
+    auto contexto = aplicativo.obtenhaContextoMutavel();
+    contexto->coloque<PlantasDao>(plantasDao);
+    contexto->coloque<UsuariosDao>(usuariosDao);
+    contexto->coloque<DenunciasDao>(denunciasDao);
+    contexto->coloque(usuario);
 
-    auto* usuario = new Usuario("John Doe",
-                                "johndoe@gmail.com",
-                                "senha-hasheada",
-                                time(nullptr),
-                                Cargo::ADMINISTRADOR);
+    aplicativo.registrarRota("obter-sugestao-de-replantio",
+                             "Obter sugestão de replantio",
+                             [](const Roteador::Contexto& contexto)
+                             {
+                                 std::shared_ptr<PlantasDao> plantasDao =
+                                     contexto.obtenha<PlantasDao>();
 
-    std::cout << "Usuário: " << *usuario->obtenhaNome()
-              << "; Cargo: " << *usuario->obtenhaCargo()
+                                 auto usuario = contexto.obtenha<Usuario>();
+                                 std::cout
+                                     << "Usuario: " << *usuario->obtenhaNome()
+                                     << ".\n";
+                             });
 
-              << "; Nascido em: "
-              << std::asctime(
-                     std::localtime(usuario->obtenhaDataDeNascimento()))
-              << "ID do Usuário: " << usuario->obtenhaId() << "\n";
+    aplicativo.rodar();
 
-    delete usuario;
-
-    return 0;
+    return EXIT_SUCCESS;
 }
