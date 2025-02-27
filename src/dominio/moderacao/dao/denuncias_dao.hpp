@@ -9,7 +9,7 @@ namespace Moderacao::Dao
 class DenunciasDao
 {
   public:
-    virtual std::vector<std::shared_ptr<Entidades::Denuncia>> liste() const = 0;
+    virtual std::vector<Entidades::Denuncia> liste() const = 0;
 
     virtual std::shared_ptr<Entidades::Denuncia>
     crie(Enums::MotivoDaDenuncia motivo,
@@ -19,7 +19,7 @@ class DenunciasDao
 
     virtual void salve(Entidades::Denuncia denuncia) = 0;
 
-    virtual std::optional<std::shared_ptr<Entidades::Denuncia>>
+    virtual std::optional<Entidades::Denuncia>
     encontre(const std::string& idDenuncia) const = 0;
 };
 
