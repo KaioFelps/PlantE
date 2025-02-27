@@ -2,6 +2,7 @@
 #include "dominio/identidade/dao/usuarios_dao.hpp"
 #include "dominio/terrenos/dao/plantas_dao.hpp"
 #include "dominio/terrenos/dao/terrenos_dao.hpp"
+#include "dominio/terrenos/dvo/terrenos_dvo.hpp"
 #include <algorithm>
 #include <stdexcept>
 
@@ -34,7 +35,7 @@ GerenteDeTerrenos::obtenhaSugestoes(const std::string& idTerreno) const
     }
 
     auto terreno = *terrenoEncontrado;
-    const auto& solo = terreno->obtenhaSolo();
+    const auto& solo = terreno.obtenhaSolo();
 
     if (!solo.has_value())
     {
@@ -72,12 +73,41 @@ GerenteDeTerrenos::listeTerrenos(const std::string& idUsuario) const
 
 void GerenteDeTerrenos::recebaDadosDoSolo(std::string idTerreno,
                                           float acidez,
-                                          unsigned char índiceDeMinerais,
-                                          unsigned char índiceDeSalinidade,
-                                          unsigned char índiceDeArgila,
-                                          unsigned char índiceDeSilte,
-                                          unsigned char cargaElétrica)
+                                          unsigned char indiceDeMinerais,
+                                          unsigned char indiceDeSalinidade,
+                                          unsigned char indiceDeArgila,
+                                          unsigned char indiceDeSilte,
+                                          unsigned char cargaEletrica)
 {
+    using Terrenos::Dao::TerrenosDao;
+    using Terrenos::Dvo::TerrenosDvo;
+    using Terrenos::Entidades::Solo;
+    using Terrenos::Entidades::Terreno;
+
+    auto terrenosDao = this->contexto->obtenha<TerrenosDao>();
+
+    auto solo = terrenosDao->crieSolo(acidez,
+                                      indiceDeMinerais,
+                                      indiceDeSalinidade,
+                                      indiceDeArgila,
+                                      indiceDeSilte,
+                                      indiceDeArgila,
+                                      cargaEletrica);
+
+    TerrenosDvo::valideSolo(*solo); // deixa o erro "borbulhar"
+
+    auto terrenoEncontrado = terrenosDao->encontre(idTerreno);
+
+    if (!terrenoEncontrado)
+    {
+        throw std::invalid_argument(
+            "Não foi possível encontrar um terreno com id \"" + idTerreno +
+            "\".");
+    }
+
+    auto terreno = *terrenoEncontrado;
+    terreno.atualizeSolo(std::move(solo));
+    terrenosDao->salve(std::move(terreno));
 }
 
 } // namespace Terrenos::Gerentes

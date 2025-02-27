@@ -15,7 +15,7 @@
 
 ### Operações implementadas
 - [x] `listeTerrenos`;
-- [ ] `recebaDadosDoSolo`;
+- [x] `recebaDadosDoSolo`;
 - [ ] `denuncie`;
 - [ ] `listeDenuncias`;
 - [ ] `marqueComoInvestigando`;
