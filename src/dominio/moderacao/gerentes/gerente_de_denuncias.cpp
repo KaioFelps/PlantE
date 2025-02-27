@@ -16,12 +16,6 @@ GerenteDeDenuncias::listeDenuncias() const
     auto denuncias = denunciasDao->liste();
     std::vector<Denuncia> denunciasCopiadas;
 
-    std::transform(denuncias.begin(),
-                   denuncias.end(),
-                   std::back_inserter(denunciasCopiadas),
-                   [](const std::shared_ptr<Denuncia>& denuncia)
-                   { return *denuncia; });
-
     return denunciasCopiadas;
 }
 
@@ -39,7 +33,7 @@ GerenteDeDenuncias::obtenhaDenuncia(std::string& idDenuncia) const
         return std::nullopt;
     }
 
-    return **denuncia;
+    return *denuncia;
 }
 
 void GerenteDeDenuncias::denuncie(std::string idRelator,
@@ -88,7 +82,7 @@ void GerenteDeDenuncias::marqueComoInvestigando(const std::string& idModerador,
     }
 
     auto moderador = std::dynamic_pointer_cast<Usuario>(*moderadorEncontrado);
-    auto denuncia = **denunciaEncontrada;
+    auto denuncia = *denunciaEncontrada;
 
     denuncia.coloqueModeradorInvestigador(std::move(moderador));
     denuncia.coloqueEstado(EstadoDaDenuncia::ANALISE);
@@ -131,7 +125,7 @@ void GerenteDeDenuncias::marqueComoResolvida(const std::string& idModerador,
 
     auto moderador = std::dynamic_pointer_cast<Usuario>(*moderadorEncontrado);
 
-    auto denuncia = **denunciaEncontrado;
+    auto denuncia = *denunciaEncontrado;
     denuncia.coloqueEstado(EstadoDaDenuncia::RESOLVIDO);
     denuncia.coloqueModeradorResolutor(moderador);
 
