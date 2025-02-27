@@ -1,5 +1,31 @@
 # Plant&
 
+## Requisitos
+- [ ] Implementar ao menos 1 caso de uso;
+- [ ] Implementar 8 operações dos contratos de operações;
+- [x] Código orientado a objetos;
+- [x] Compila e executa;
+
+### Casos de usos
+- [ ] Inserir Resultado da Análise do Solo
+- [ ] Realizar Denúncia
+- [ ] Investigar Denúncia
+- [ ] Resolver Denúncia
+- [ ] Adicionar Nova Plantação
+
+### Operações implementadas
+- [ ] `listeTerrenos`;
+- [ ] `recebaDadosDoSolo`;
+- [ ] `denuncie`;
+- [ ] `listeDenuncias`;
+- [ ] `marqueComoInvestigando`;
+- [ ] `marqueComoResolvida`;
+- [ ] `listePlantas`;
+- [ ] `adicionePlantacao`;
+- [ ] `obtenhaSugestoes`;
+- [ ] `finalizePlantacao`;
+- [ ] `desistaDaPlantacao`;
+
 ## Primeiros passos
 Para rodar o projeto, são necessárias ferramentas para baixar as dependências do sistema,
 vinculá-las, e compilar tudo.
