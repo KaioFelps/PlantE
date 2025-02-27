@@ -22,11 +22,11 @@ class Plantacao
     time_t dataDeInicio;
     std::optional<time_t> dataDeFinalizacao;
     std::optional<time_t> dataDeDesistencia;
-    std::unique_ptr<Planta> planta;
-    std::unique_ptr<Terreno> terreno;
+    std::shared_ptr<Planta> planta;
+    std::shared_ptr<Terreno> terreno;
 
   public:
-    Plantacao(std::unique_ptr<Planta> planta, std::unique_ptr<Terreno> terreno);
+    Plantacao(std::shared_ptr<Planta> planta, std::shared_ptr<Terreno> terreno);
 
     const std::string& obtenhaId() const;
     const time_t& obtenhaDataDeInicio() const;

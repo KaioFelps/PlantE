@@ -8,8 +8,8 @@
 namespace Terrenos::Entidades
 {
 
-Plantacao::Plantacao(std::unique_ptr<Planta> planta_,
-                     std::unique_ptr<Terreno> terreno)
+Plantacao::Plantacao(std::shared_ptr<Planta> planta_,
+                     std::shared_ptr<Terreno> terreno)
     : id(Utils::GeradorDeId::gerarUUID()),
       dataDeInicio(Utils::DataHora::obtenhaDataHoraAtual()),
       planta(std::move(planta_)), terreno(std::move(terreno))
