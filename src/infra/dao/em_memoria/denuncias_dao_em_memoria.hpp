@@ -8,8 +8,7 @@ namespace Daos::EmMemoria
 class DenunciasDaoEmMemoria : public Moderacao::Dao::DenunciasDao
 {
   public:
-    std::vector<std::shared_ptr<Moderacao::Entidades::Denuncia>>
-    liste() const final;
+    std::vector<Moderacao::Entidades::Denuncia> liste() const final;
 
     std::shared_ptr<Moderacao::Entidades::Denuncia>
     crie(Moderacao::Enums::MotivoDaDenuncia motivo,
@@ -20,7 +19,7 @@ class DenunciasDaoEmMemoria : public Moderacao::Dao::DenunciasDao
 
     void salve(Moderacao::Entidades::Denuncia denuncia) override;
 
-    std::optional<std::shared_ptr<Moderacao::Entidades::Denuncia>>
+    std::optional<Moderacao::Entidades::Denuncia>
     encontre(const std::string& idDenuncia) const override;
 };
 
