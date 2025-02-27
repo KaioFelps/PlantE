@@ -15,7 +15,7 @@ class TerrenosDao
     virtual std::optional<std::shared_ptr<Entidades::Terreno>>
     encontre(const std::string& idTerreno) const = 0;
 
-    virtual std::shared_ptr<Entidades::Solo>
+    virtual std::unique_ptr<Entidades::Solo>
     crieSolo(double acidez,
              unsigned int indiceDeMinerais,
              unsigned int indiceDeSalinidade,

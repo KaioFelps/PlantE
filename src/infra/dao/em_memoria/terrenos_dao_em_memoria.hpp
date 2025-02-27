@@ -8,7 +8,7 @@ class TerrenosDaoEmMemoria : public Terrenos::Dao::TerrenosDao
     std::optional<std::shared_ptr<Terrenos::Entidades::Terreno>>
     encontre(const std::string& idTerreno) const final;
 
-    std::shared_ptr<Terrenos::Entidades::Solo>
+    std::unique_ptr<Terrenos::Entidades::Solo>
     crieSolo(double acidez,
              unsigned int indiceDeMinerais,
              unsigned int indiceDeSalinidade,
