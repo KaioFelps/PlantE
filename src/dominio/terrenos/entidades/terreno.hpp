@@ -36,6 +36,8 @@ class Terreno
             Terrenos::Enums::Clima clima,
             std::shared_ptr<Identidade::Entidades::Usuario> proprietario);
 
+    Terreno(const Terreno& terreno);
+
     const std::string& obtenhaId() const;
     unsigned int obtenhaLargura() const;
     unsigned int obtenhaComprimento() const;
