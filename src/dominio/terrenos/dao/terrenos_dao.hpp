@@ -22,12 +22,14 @@ class TerrenosDao
              unsigned int indiceDeSalinidade,
              unsigned int indiceDeArgila,
              unsigned int indiceDeSilte,
+             unsigned int indiceDeAreia,
              double cargaEletrica) = 0;
 
     virtual void salve(Entidades::Terreno terreno) = 0;
 
     virtual std::vector<std::shared_ptr<Entidades::Terreno>>
-    listeTodosDoUsuario(Identidade::Entidades::Usuario usuario) const = 0;
+    listeTodosDoUsuario(
+        const Identidade::Entidades::Usuario& usuario) const = 0;
 };
 
 } // namespace Terrenos::Dao
