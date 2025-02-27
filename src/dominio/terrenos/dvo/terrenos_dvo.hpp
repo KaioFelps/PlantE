@@ -7,8 +7,7 @@ namespace Terrenos::Dvo
 class TerrenosDvo
 {
   public:
-    static void valideSolo(
-        const std::shared_ptr<const Entidades::Solo>& solo) noexcept(false);
+    static void valideSolo(const Entidades::Solo& solo) noexcept(false);
 };
 
 } // namespace Terrenos::Dvo
