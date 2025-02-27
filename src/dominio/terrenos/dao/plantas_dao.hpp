@@ -12,7 +12,7 @@ namespace Terrenos::Dao
 class PlantasDao
 {
   public:
-    virtual std::vector<std::shared_ptr<Entidades::Planta>>
+    virtual std::vector<Entidades::Planta>
     encontrePlantasCorrespondentes(const Entidades::Solo& solo) = 0;
 
     virtual std::optional<std::shared_ptr<Entidades::Planta>>

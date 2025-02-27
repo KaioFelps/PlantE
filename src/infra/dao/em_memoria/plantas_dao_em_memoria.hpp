@@ -8,7 +8,7 @@ namespace Daos::EmMemoria
 class PlantasDaoEmMemoria : public Terrenos::Dao::PlantasDao
 {
   public:
-    std::vector<std::shared_ptr<Terrenos::Entidades::Planta>>
+    std::vector<Terrenos::Entidades::Planta>
     encontrePlantasCorrespondentes(const Terrenos::Entidades::Solo& solo) final;
 
     std::optional<std::shared_ptr<Terrenos::Entidades::Planta>>
