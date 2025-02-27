@@ -10,19 +10,23 @@ using Terrenos::Entidades::Solo;
 namespace Daos::EmMemoria
 {
 
-std::vector<std::shared_ptr<Planta>>
+std::vector<Planta>
 PlantasDaoEmMemoria::encontrePlantasCorrespondentes(const Solo& solo)
 {
     std::lock_guard<std::mutex> lock(*Globais::plantasDbMutex);
 
-    std::vector<std::shared_ptr<Planta>> plantasCompativeis;
+    auto plantasCompativeis = std::vector<Planta>();
 
-    std::copy_if(
+    std::for_each(
         Globais::plantasDb->begin(),
         Globais::plantasDb->end(),
-        std::back_insert_iterator(plantasCompativeis),
-        [ &solo ](const std::shared_ptr<Planta>& planta)
-        { return PlantasDaoEmMemoria::plantaEhCompativel(*planta, solo); });
+        [ &solo, &plantasCompativeis ](const std::shared_ptr<Planta>& planta)
+        {
+            if (PlantasDaoEmMemoria::plantaEhCompativel(*planta, solo))
+            {
+                plantasCompativeis.push_back(*planta);
+            }
+        });
 
     return plantasCompativeis;
 }
