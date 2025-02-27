@@ -14,17 +14,22 @@
 - [ ] Adicionar Nova Plantação
 
 ### Operações implementadas
+**Dos casos de uso**
 - [x] `listeTerrenos`;
 - [x] `recebaDadosDoSolo`;
-- [ ] `denuncie`;
-- [ ] `listeDenuncias`;
-- [ ] `marqueComoInvestigando`;
-- [ ] `marqueComoResolvida`;
+- [x] `denuncie`;
+- [x] `listeDenuncias`;
+- [x] `marqueComoInvestigando`;
+- [x] `marqueComoResolvida`;
 - [ ] `listePlantas`;
 - [ ] `adicionePlantacao`;
+
+**Extras**
 - [x] `obtenhaSugestoes`;
 - [ ] `finalizePlantacao`;
 - [ ] `desistaDaPlantacao`;
+- [x] `denuncie`
+- [x] `obtenhaDenuncia`
 
 ## Primeiros passos
 Para rodar o projeto, são necessárias ferramentas para baixar as dependências do sistema,
