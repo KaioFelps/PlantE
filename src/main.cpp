@@ -2,11 +2,13 @@
 #include "dominio/identidade/entidades/usuario.hpp"
 #include "dominio/moderacao/dao/denuncias_dao.hpp"
 #include "dominio/terrenos/dao/plantas_dao.hpp"
+#include "dominio/terrenos/dao/terrenos_dao.hpp"
 #include "dominio/terrenos/entidades/solo.hpp"
 #include "dominio/terrenos/entidades/terreno.hpp"
 #include "globais.hpp"
 #include "infra/dao/em_memoria/denuncias_dao_em_memoria.hpp"
 #include "infra/dao/em_memoria/plantas_dao_em_memoria.hpp"
+#include "infra/dao/em_memoria/terrenos_dao_em_memoria.hpp"
 #include "infra/dao/em_memoria/usuarios_dao_em_memoria.hpp"
 #include "roteador.hpp"
 #include "util/datas.hpp"
@@ -22,6 +24,7 @@ int main(int argc, char* argv[])
     using namespace Identidade::Enums;
     using namespace Daos::EmMemoria;
     using namespace Moderacao::Dao;
+    using namespace Terrenos::Dao;
 
     if (argc >= 2 && std::string_view(argv[ 1 ]) == "--seed")
     {
@@ -42,6 +45,7 @@ int main(int argc, char* argv[])
     auto plantasDao = std::make_shared<PlantasDaoEmMemoria>();
     auto usuariosDao = std::make_shared<UsuariosDaoEmMemoria>();
     auto denunciasDao = std::make_shared<DenunciasDaoEmMemoria>();
+    auto terrenosDao = std::make_shared<TerrenosDaoEmMemoria>();
 
     usuariosDao->coloque(usuario);
 
@@ -49,6 +53,7 @@ int main(int argc, char* argv[])
     contexto->coloque<PlantasDao>(plantasDao);
     contexto->coloque<UsuariosDao>(usuariosDao);
     contexto->coloque<DenunciasDao>(denunciasDao);
+    contexto->coloque<TerrenosDao>(terrenosDao);
     contexto->coloque(usuario);
 
     aplicativo.registrarRota("obter-sugestao-de-replantio",
