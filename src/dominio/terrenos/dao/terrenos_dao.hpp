@@ -16,8 +16,7 @@ class TerrenosDao
     encontre(const std::string& idTerreno) const = 0;
 
     virtual std::shared_ptr<Entidades::Solo>
-    crieSolo(const std::string& idTerreno,
-             double acidez,
+    crieSolo(double acidez,
              unsigned int indiceDeMinerais,
              unsigned int indiceDeSalinidade,
              unsigned int indiceDeArgila,
