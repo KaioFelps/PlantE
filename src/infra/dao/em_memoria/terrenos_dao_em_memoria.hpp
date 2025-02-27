@@ -5,7 +5,7 @@ namespace Daos::EmMemoria
 
 class TerrenosDaoEmMemoria : public Terrenos::Dao::TerrenosDao
 {
-    std::optional<std::shared_ptr<Terrenos::Entidades::Terreno>>
+    std::optional<Terrenos::Entidades::Terreno>
     encontre(const std::string& idTerreno) const final;
 
     std::unique_ptr<Terrenos::Entidades::Solo>
