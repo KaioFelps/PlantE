@@ -13,7 +13,7 @@ class PlantasDao
 {
   public:
     virtual std::vector<std::shared_ptr<Entidades::Planta>>
-    encontrePlantasCorrespondentes(Entidades::Solo& solo) = 0;
+    encontrePlantasCorrespondentes(const Entidades::Solo& solo) = 0;
 
     virtual std::optional<std::shared_ptr<Entidades::Planta>>
     encontre(const std::string& idPlanta) = 0;
