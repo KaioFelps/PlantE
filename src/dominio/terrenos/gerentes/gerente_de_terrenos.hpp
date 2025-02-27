@@ -22,11 +22,11 @@ class GerenteDeTerrenos
 
     void recebaDadosDoSolo(std::string idTerreno,
                            float acidez,
-                           unsigned char índiceDeMinerais,
-                           unsigned char índiceDeSalinidade,
-                           unsigned char índiceDeArgila,
-                           unsigned char índiceDeSilte,
-                           unsigned char cargaElétrica);
+                           unsigned char indiceDeMinerais,
+                           unsigned char indiceDeSalinidade,
+                           unsigned char indiceDeArgila,
+                           unsigned char indiceDeSilte,
+                           unsigned char cargaEletrica);
 };
 
 } // namespace Terrenos::Gerentes
