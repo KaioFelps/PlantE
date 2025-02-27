@@ -9,7 +9,7 @@ class PlantasDaoEmMemoria : public Terrenos::Dao::PlantasDao
 {
   public:
     std::vector<std::shared_ptr<Terrenos::Entidades::Planta>>
-    encontrePlantasCorrespondentes(Terrenos::Entidades::Solo& solo) final;
+    encontrePlantasCorrespondentes(const Terrenos::Entidades::Solo& solo) final;
 
     std::optional<std::shared_ptr<Terrenos::Entidades::Planta>>
     encontre(const std::string& idPlanta) final;

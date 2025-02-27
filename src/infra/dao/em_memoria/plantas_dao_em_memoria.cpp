@@ -11,7 +11,7 @@ namespace Daos::EmMemoria
 {
 
 std::vector<std::shared_ptr<Planta>>
-PlantasDaoEmMemoria::encontrePlantasCorrespondentes(Solo& solo)
+PlantasDaoEmMemoria::encontrePlantasCorrespondentes(const Solo& solo)
 {
     std::lock_guard<std::mutex> lock(*Globais::plantasDbMutex);
 
