@@ -23,7 +23,8 @@ UsuariosDaoEmMemoria::encontre(const std::string& idUsuario)
     bool usuarioFoiEncontrado = usuario != usuariosDb->end();
     if (usuarioFoiEncontrado)
     {
-        return *usuario;
+        auto copiaDoUsuario = **usuario;
+        return std::make_shared<Usuario>(copiaDoUsuario);
     }
 
     return std::nullopt;
