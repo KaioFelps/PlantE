@@ -17,6 +17,8 @@ class PlantasDao
 
     virtual std::optional<std::shared_ptr<Entidades::Planta>>
     encontre(const std::string& idPlanta) = 0;
+
+    virtual std::vector<Entidades::Planta> liste() const = 0;
 };
 
 } // namespace Terrenos::Dao
