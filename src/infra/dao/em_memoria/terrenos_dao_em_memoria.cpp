@@ -5,7 +5,7 @@
 namespace Daos::EmMemoria
 {
 
-std::optional<std::shared_ptr<Terrenos::Entidades::Terreno>>
+std::optional<Terrenos::Entidades::Terreno>
 TerrenosDaoEmMemoria::encontre(const std::string& idTerreno) const
 {
     using Globais::terrenosDb;
@@ -26,7 +26,7 @@ TerrenosDaoEmMemoria::encontre(const std::string& idTerreno) const
         return std::nullopt;
     }
 
-    return *terrenoEncontrado;
+    return **terrenoEncontrado;
 }
 
 std::unique_ptr<Terrenos::Entidades::Solo>

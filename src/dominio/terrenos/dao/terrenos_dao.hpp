@@ -12,7 +12,7 @@ namespace Terrenos::Dao
 class TerrenosDao
 {
   public:
-    virtual std::optional<std::shared_ptr<Entidades::Terreno>>
+    virtual std::optional<Entidades::Terreno>
     encontre(const std::string& idTerreno) const = 0;
 
     virtual std::unique_ptr<Entidades::Solo>
