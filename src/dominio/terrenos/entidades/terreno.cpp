@@ -17,6 +17,18 @@ Terreno::Terreno(unsigned int largura_,
 {
 }
 
+Terreno::Terreno(const Terreno& terreno)
+    : id(terreno.id), largura(terreno.largura),
+      comprimento(terreno.comprimento),
+      solo(terreno.solo.has_value()
+               ? std::make_optional(
+                     std::make_unique<Entidades::Solo>(**terreno.solo))
+               : std::nullopt),
+      exposicaoSolar(terreno.exposicaoSolar), clima(terreno.clima),
+      plantacaoAtiva(terreno.plantacaoAtiva), proprietario(terreno.proprietario)
+{
+}
+
 const std::string& Terreno::obtenhaId() const
 {
     return this->id;
