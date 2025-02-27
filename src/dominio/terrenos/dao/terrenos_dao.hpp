@@ -18,11 +18,11 @@ class TerrenosDao
     virtual std::shared_ptr<Entidades::Solo>
     crieSolo(const std::string& idTerreno,
              double acidez,
-             unsigned int índiceDeMinerais,
-             unsigned int índiceDeSalinidade,
-             unsigned int índiceDeArgila,
-             unsigned int índiceDeSilte,
-             double cargaElétrica) = 0;
+             unsigned int indiceDeMinerais,
+             unsigned int indiceDeSalinidade,
+             unsigned int indiceDeArgila,
+             unsigned int indiceDeSilte,
+             double cargaEletrica) = 0;
 
     virtual void salve(Entidades::Terreno terreno) = 0;
 
