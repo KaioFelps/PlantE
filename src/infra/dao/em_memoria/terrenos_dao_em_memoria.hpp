@@ -20,8 +20,7 @@ class TerrenosDaoEmMemoria : public Terrenos::Dao::TerrenosDao
 
     void salve(Terrenos::Entidades::Terreno terreno) final;
 
-    std::vector<std::shared_ptr<Terrenos::Entidades::Terreno>>
-    listeTodosDoUsuario(
+    std::vector<Terrenos::Entidades::Terreno> listeTodosDoUsuario(
         const Identidade::Entidades::Usuario& usuario) const final;
 };
 

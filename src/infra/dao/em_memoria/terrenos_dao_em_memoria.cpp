@@ -78,7 +78,7 @@ void TerrenosDaoEmMemoria::salve(Terrenos::Entidades::Terreno terreno)
     terrenosDb->push_back(terrenoCompartilhado);
 }
 
-std::vector<std::shared_ptr<Terrenos::Entidades::Terreno>>
+std::vector<Terrenos::Entidades::Terreno>
 TerrenosDaoEmMemoria::listeTodosDoUsuario(
     const Identidade::Entidades::Usuario& usuario) const
 {
@@ -87,7 +87,7 @@ TerrenosDaoEmMemoria::listeTodosDoUsuario(
     using Identidade::Entidades::Usuario;
     using Terrenos::Entidades::Terreno;
 
-    auto terrenosDoUsuario = std::vector<std::shared_ptr<Terreno>>();
+    auto terrenosDoUsuario = std::vector<Terreno>();
     auto idUsuario = usuario.obtenhaId();
     std::lock_guard<std::mutex> lock(*terrenosDbMutex);
 
@@ -99,7 +99,7 @@ TerrenosDaoEmMemoria::listeTodosDoUsuario(
         {
             if (terreno->obtenhaProprietario()->obtenhaId() == idUsuario)
             {
-                terrenosDoUsuario.push_back(terreno);
+                terrenosDoUsuario.push_back(*terreno);
             }
         });
 
