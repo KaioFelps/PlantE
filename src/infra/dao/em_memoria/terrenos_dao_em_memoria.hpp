@@ -1,0 +1,28 @@
+#include "dominio/terrenos/dao/terrenos_dao.hpp"
+
+namespace Daos::EmMemoria
+{
+
+class TerrenosDaoEmMemoria : public Terrenos::Dao::TerrenosDao
+{
+    std::optional<std::shared_ptr<Terrenos::Entidades::Terreno>>
+    encontre(const std::string& idTerreno) const final;
+
+    std::shared_ptr<Terrenos::Entidades::Solo>
+    crieSolo(const std::string& idTerreno,
+             double acidez,
+             unsigned int indiceDeMinerais,
+             unsigned int indiceDeSalinidade,
+             unsigned int indiceDeArgila,
+             unsigned int indiceDeSilte,
+             unsigned int indiceDeAreia,
+             double cargaEletrica) final;
+
+    void salve(Terrenos::Entidades::Terreno terreno) final;
+
+    std::vector<std::shared_ptr<Terrenos::Entidades::Terreno>>
+    listeTodosDoUsuario(
+        const Identidade::Entidades::Usuario& usuario) const final;
+};
+
+} // namespace Daos::EmMemoria
