@@ -29,7 +29,7 @@ TerrenosDaoEmMemoria::encontre(const std::string& idTerreno) const
     return *terrenoEncontrado;
 }
 
-std::shared_ptr<Terrenos::Entidades::Solo>
+std::unique_ptr<Terrenos::Entidades::Solo>
 TerrenosDaoEmMemoria::crieSolo(double acidez,
                                unsigned int indiceDeMinerais,
                                unsigned int indiceDeSalinidade,
@@ -39,7 +39,7 @@ TerrenosDaoEmMemoria::crieSolo(double acidez,
                                double cargaEletrica)
 {
     using Terrenos::Entidades::Solo;
-    auto solo = std::make_shared<Solo>(acidez,
+    auto solo = std::make_unique<Solo>(acidez,
                                        indiceDeMinerais,
                                        indiceDeSalinidade,
                                        indiceDeArgila,
