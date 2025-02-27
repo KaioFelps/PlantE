@@ -1,8 +1,9 @@
 #pragma once
 
-#include "../enums/clima.hpp"
-#include "../enums/exposicao_solar.hpp"
-#include "./plantacao.hpp"
+#include "dominio/identidade/entidades/usuario.hpp"
+#include "dominio/terrenos/enums/clima.hpp"
+#include "dominio/terrenos/enums/exposicao_solar.hpp"
+#include "plantacao.hpp"
 #include "solo.hpp"
 #include <memory>
 #include <optional>
@@ -26,12 +27,14 @@ class Terreno
     Terrenos::Enums::ExposicaoSolar exposicaoSolar;
     Terrenos::Enums::Clima clima;
     std::optional<std::shared_ptr<Plantacao>> plantacaoAtiva;
+    std::shared_ptr<Identidade::Entidades::Usuario> proprietario;
 
   public:
     Terreno(unsigned int largura,
             unsigned int comprimento,
             Terrenos::Enums::ExposicaoSolar exposicaoSolar,
-            Terrenos::Enums::Clima clima);
+            Terrenos::Enums::Clima clima,
+            std::shared_ptr<Identidade::Entidades::Usuario> proprietario);
 
     const std::string& obtenhaId() const;
     unsigned int obtenhaLargura() const;
@@ -42,6 +45,9 @@ class Terreno
     Terrenos::Enums::Clima obtenhaClima() const;
     const std::optional<std::shared_ptr<Plantacao>>&
     obtenhaPlantacaoAtiva() const;
+
+    std::shared_ptr<const Identidade::Entidades::Usuario>
+    obtenhaProprietario() const;
 
     void atualizeSolo(std::unique_ptr<Solo> solo);
     void coloqueExposicaoSolar(Terrenos::Enums::ExposicaoSolar exposicaoSolar);
