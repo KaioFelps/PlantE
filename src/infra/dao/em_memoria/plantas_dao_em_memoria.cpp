@@ -73,7 +73,7 @@ bool PlantasDaoEmMemoria::plantaEhCompativel(const Planta& planta,
     // 3. Avaliação da retenção de água (argila, areia e silte influenciam
     // nisso)
     unsigned char retencaoReal =
-        (solo.obtenhaIndiceDeArgila() * 2 + solo.obtenhaIndiceDeSilite()) / 3;
+        (solo.obtenhaIndiceDeArgila() * 2 + solo.obtenhaIndiceDeSilte()) / 3;
 
     if (std::abs(retencaoReal - planta.obtenhaIndiceDeRetencaoDeAgua()) >
         INDICE_MINIMO_DE_RETENCAO_DE_AGUA)

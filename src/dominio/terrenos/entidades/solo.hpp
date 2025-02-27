@@ -12,7 +12,7 @@ class Solo
     unsigned char indiceDeSalinidade;
     unsigned char indiceDeArgila;
     unsigned char indiceDeAreia;
-    unsigned char indiceDeSilite;
+    unsigned char indiceDeSilte;
     double cargaEletrica;
 
   public:
@@ -21,7 +21,7 @@ class Solo
          unsigned char indiceDeSalinidade,
          unsigned char indiceDeArgila,
          unsigned char indiceDeAreia,
-         unsigned char indiceDeSilite,
+         unsigned char indiceDeSilte,
          double cargaEletrica);
 
     double obtenhaAcidez() const;
@@ -29,7 +29,7 @@ class Solo
     unsigned char obtenhaIndiceDeSalinidade() const;
     unsigned char obtenhaIndiceDeArgila() const;
     unsigned char obtenhaIndiceDeAreia() const;
-    unsigned char obtenhaIndiceDeSilite() const;
+    unsigned char obtenhaIndiceDeSilte() const;
     double obtenhaCargaEletrica() const;
 };
 
