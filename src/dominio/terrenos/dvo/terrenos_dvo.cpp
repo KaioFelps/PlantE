@@ -5,7 +5,7 @@ namespace Terrenos::Dvo
 {
 
 void TerrenosDvo::valideSolo(
-    std::shared_ptr<const Entidades::Solo>& solo) noexcept(false)
+    const std::shared_ptr<const Entidades::Solo>& solo) noexcept(false)
 {
     const unsigned char LIMITE_DO_INTERVALO = 100;
 
