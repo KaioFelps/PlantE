@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../identidade/entidades/usuario.hpp"
-#include "../entidades/terreno.hpp"
+#include "dominio/identidade/entidades/usuario.hpp"
+#include "dominio/terrenos/entidades/terreno.hpp"
 #include <memory>
 #include <optional>
 #include <vector>
