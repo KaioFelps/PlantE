@@ -14,7 +14,7 @@
 - [ ] Adicionar Nova Plantação
 
 ### Operações implementadas
-- [ ] `listeTerrenos`;
+- [x] `listeTerrenos`;
 - [ ] `recebaDadosDoSolo`;
 - [ ] `denuncie`;
 - [ ] `listeDenuncias`;
