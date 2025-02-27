@@ -27,8 +27,7 @@ class TerrenosDao
 
     virtual void salve(Entidades::Terreno terreno) = 0;
 
-    virtual std::vector<std::shared_ptr<Entidades::Terreno>>
-    listeTodosDoUsuario(
+    virtual std::vector<Entidades::Terreno> listeTodosDoUsuario(
         const Identidade::Entidades::Usuario& usuario) const = 0;
 };
 
