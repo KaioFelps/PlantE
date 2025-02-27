@@ -8,11 +8,22 @@ namespace Daos::EmMemoria
 using Globais::denunciasDb;
 using Globais::denunciasDbMutex;
 
-std::vector<std::shared_ptr<Moderacao::Entidades::Denuncia>>
-DenunciasDaoEmMemoria::liste() const
+std::vector<Moderacao::Entidades::Denuncia> DenunciasDaoEmMemoria::liste() const
 {
+    using Moderacao::Entidades::Denuncia;
+
     std::lock_guard<std::mutex> lock(*denunciasDbMutex);
-    return *denunciasDb;
+
+    auto copiaDasDenuncias = std::vector<Denuncia>();
+    copiaDasDenuncias.reserve(denunciasDb->size());
+
+    std::for_each(
+        denunciasDb->begin(),
+        denunciasDb->end(),
+        [ &copiaDasDenuncias ](const std::shared_ptr<Denuncia>& denuncia)
+        { copiaDasDenuncias.push_back(*denuncia); });
+
+    return copiaDasDenuncias;
 }
 
 std::shared_ptr<Moderacao::Entidades::Denuncia> DenunciasDaoEmMemoria::crie(
@@ -57,7 +68,7 @@ void DenunciasDaoEmMemoria::salve(Moderacao::Entidades::Denuncia denuncia)
     denunciasDb->push_back(std::make_shared<Denuncia>(denuncia));
 }
 
-std::optional<std::shared_ptr<Moderacao::Entidades::Denuncia>>
+std::optional<Moderacao::Entidades::Denuncia>
 DenunciasDaoEmMemoria::encontre(const std::string& idDenuncia) const
 {
     using Moderacao::Entidades::Denuncia;
@@ -74,7 +85,7 @@ DenunciasDaoEmMemoria::encontre(const std::string& idDenuncia) const
 
     if (denunciaFoiEncontrada)
     {
-        return *denunciasIterator;
+        return **denunciasIterator;
     }
 
     return std::nullopt;
