@@ -31,8 +31,7 @@ PlantasDaoEmMemoria::encontrePlantasCorrespondentes(const Solo& solo)
     return plantasCompativeis;
 }
 
-std::optional<std::shared_ptr<Planta>>
-PlantasDaoEmMemoria::encontre(const std::string& idPlanta)
+std::optional<Planta> PlantasDaoEmMemoria::encontre(const std::string& idPlanta)
 {
     std::lock_guard<std::mutex> lock(*Globais::plantasDbMutex);
 
@@ -46,7 +45,7 @@ PlantasDaoEmMemoria::encontre(const std::string& idPlanta)
 
     if (plantaFoiEncontrada)
     {
-        return *plantasIterator;
+        return **plantasIterator;
     }
 
     return std::nullopt;
