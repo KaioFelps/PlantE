@@ -22,7 +22,7 @@
 - [ ] `marqueComoResolvida`;
 - [ ] `listePlantas`;
 - [ ] `adicionePlantacao`;
-- [ ] `obtenhaSugestoes`;
+- [x] `obtenhaSugestoes`;
 - [ ] `finalizePlantacao`;
 - [ ] `desistaDaPlantacao`;
 
