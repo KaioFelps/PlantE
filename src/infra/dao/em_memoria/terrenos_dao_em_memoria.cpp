@@ -30,8 +30,7 @@ TerrenosDaoEmMemoria::encontre(const std::string& idTerreno) const
 }
 
 std::shared_ptr<Terrenos::Entidades::Solo>
-TerrenosDaoEmMemoria::crieSolo(const std::string& idTerreno,
-                               double acidez,
+TerrenosDaoEmMemoria::crieSolo(double acidez,
                                unsigned int indiceDeMinerais,
                                unsigned int indiceDeSalinidade,
                                unsigned int indiceDeArgila,
