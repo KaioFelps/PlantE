@@ -3,6 +3,7 @@
 #include "dominio/identidade/entidades/usuario.hpp"
 #include "dominio/moderacao/entidades/denuncia.hpp"
 #include "dominio/terrenos/entidades/planta.hpp"
+#include "dominio/terrenos/entidades/terreno.hpp"
 #include <memory>
 #include <mutex>
 #include <vector>
@@ -27,6 +28,9 @@ extern DbEmMemoria<Identidade::Entidades::Usuario> usuariosDb;
 
 extern std::shared_ptr<std::mutex> denunciasDbMutex;
 extern DbEmMemoria<Moderacao::Entidades::Denuncia> denunciasDb;
+
+extern std::shared_ptr<std::mutex> terrenosDbMutex;
+extern DbEmMemoria<Terrenos::Entidades::Terreno> terrenosDb;
 
 void popular();
 
