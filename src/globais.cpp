@@ -4,6 +4,7 @@
 using Identidade::Entidades::Usuario;
 using Moderacao::Entidades::Denuncia;
 using Terrenos::Entidades::Planta;
+using Terrenos::Entidades::Plantacao;
 using Terrenos::Entidades::Terreno;
 
 namespace Daos::EmMemoria::Globais
@@ -21,6 +22,9 @@ DbEmMemoria<Denuncia> denunciasDb = instanciarArmazenamento<Denuncia>();
 
 std::shared_ptr<std::mutex> terrenosDbMutex = std::make_shared<std::mutex>();
 DbEmMemoria<Terreno> terrenosDb = instanciarArmazenamento<Terreno>();
+
+std::shared_ptr<std::mutex> plantacoesDbMutex = std::make_shared<std::mutex>();
+DbEmMemoria<Plantacao> plantacoesDb = instanciarArmazenamento<Plantacao>();
 
 void popular()
 {
