@@ -8,11 +8,11 @@ Solo::Solo(double acidez_,
            unsigned char indiceDeSalinidade_,
            unsigned char indiceDeArgila_,
            unsigned char indiceDeAreia_,
-           unsigned char indiceDeSilite_,
+           unsigned char indiceDeSilte_,
            double cargaEletrica_)
     : acidez(acidez_), indiceDeMinerais(indiceDeMinerais_),
       indiceDeSalinidade(indiceDeSalinidade_), indiceDeArgila(indiceDeArgila_),
-      indiceDeAreia(indiceDeAreia_), indiceDeSilite(indiceDeSilite_),
+      indiceDeAreia(indiceDeAreia_), indiceDeSilte(indiceDeSilte_),
       cargaEletrica(cargaEletrica_)
 {
 }
@@ -42,9 +42,9 @@ unsigned char Solo::obtenhaIndiceDeAreia() const
     return this->indiceDeAreia;
 }
 
-unsigned char Solo::obtenhaIndiceDeSilite() const
+unsigned char Solo::obtenhaIndiceDeSilte() const
 {
-    return this->indiceDeSilite;
+    return this->indiceDeSilte;
 }
 
 double Solo::obtenhaCargaEletrica() const
