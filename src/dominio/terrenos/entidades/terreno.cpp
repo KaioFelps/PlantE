@@ -1,6 +1,7 @@
-#include "./terreno.hpp"
+#include "terreno.hpp"
 #include "util/id.hpp"
 #include <iostream>
+#include <utility>
 
 namespace Terrenos::Entidades
 {
@@ -8,9 +9,11 @@ namespace Terrenos::Entidades
 Terreno::Terreno(unsigned int largura_,
                  unsigned int comprimento_,
                  Terrenos::Enums::ExposicaoSolar exposicaoSolar_,
-                 Terrenos::Enums::Clima clima_)
+                 Terrenos::Enums::Clima clima_,
+                 std::shared_ptr<Identidade::Entidades::Usuario> proprietario_)
     : id(Utils::GeradorDeId::gerarUUID()), largura(largura_),
-      comprimento(comprimento_), exposicaoSolar(exposicaoSolar_), clima(clima_)
+      comprimento(comprimento_), exposicaoSolar(exposicaoSolar_), clima(clima_),
+      proprietario(std::move(proprietario_))
 {
 }
 
@@ -53,6 +56,12 @@ const std::optional<std::shared_ptr<Plantacao>>&
 Terreno::obtenhaPlantacaoAtiva() const
 {
     return this->plantacaoAtiva;
+}
+
+std::shared_ptr<const Identidade::Entidades::Usuario>
+Terreno::obtenhaProprietario() const
+{
+    return this->proprietario;
 }
 
 void Terreno::atualizeSolo(std::unique_ptr<Solo> solo)
