@@ -188,7 +188,7 @@ void GerenteDeTerrenos::adicionePlantacao(const std::string& idTerreno,
     auto planta = *plantaEncontrada;
     auto terreno = std::make_shared<Terreno>(*terrenoEncontrado);
 
-    auto plantacao = plantacoesDao->crie(planta, terreno);
+    auto plantacao = plantacoesDao->crie(std::move(planta), std::move(terreno));
 
     terreno->finalizePlantacaoAtiva();
     terrenosDao->salve(terreno);
