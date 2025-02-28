@@ -4,12 +4,17 @@
 namespace Terrenos::Gerentes
 {
 
+GerenteDePlantacoes::GerenteDePlantacoes(Roteador::Contexto& contexto_)
+    : contexto(contexto_)
+{
+}
+
 std::vector<Entidades::Planta> GerenteDePlantacoes::listePlantas() const
 {
     using Dao::PlantasDao;
     using Entidades::Planta;
 
-    auto plantasDao = this->contexto->obtenha<PlantasDao>();
+    auto plantasDao = this->contexto.obtenha<PlantasDao>();
     auto plantas = plantasDao->liste();
 
     return plantas;

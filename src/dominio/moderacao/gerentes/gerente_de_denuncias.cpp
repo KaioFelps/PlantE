@@ -6,13 +6,19 @@
 
 namespace Moderacao::Gerentes
 {
+
+GerenteDeDenuncias::GerenteDeDenuncias(Roteador::Contexto& contexto_)
+    : contexto(contexto_)
+{
+}
+
 std::vector<Moderacao::Entidades::Denuncia>
 GerenteDeDenuncias::listeDenuncias() const
 {
     using Moderacao::Dao::DenunciasDao;
     using Moderacao::Entidades::Denuncia;
 
-    auto denunciasDao = this->contexto->obtenha<DenunciasDao>();
+    auto denunciasDao = this->contexto.obtenha<DenunciasDao>();
     auto denuncias = denunciasDao->liste();
     std::vector<Denuncia> denunciasCopiadas;
 
@@ -25,7 +31,7 @@ GerenteDeDenuncias::obtenhaDenuncia(std::string& idDenuncia) const
     using Moderacao::Dao::DenunciasDao;
     using Moderacao::Entidades::Denuncia;
 
-    auto denunciasDao = this->contexto->obtenha<DenunciasDao>();
+    auto denunciasDao = this->contexto.obtenha<DenunciasDao>();
     auto denuncia = denunciasDao->encontre(idDenuncia);
 
     if (!denuncia)
@@ -45,7 +51,7 @@ void GerenteDeDenuncias::denuncie(std::string idRelator,
     using Moderacao::Dao::DenunciasDao;
     using Moderacao::Entidades::Denuncia;
 
-    auto denunciasDao = this->contexto->obtenha<DenunciasDao>();
+    auto denunciasDao = this->contexto.obtenha<DenunciasDao>();
 }
 
 void GerenteDeDenuncias::marqueComoInvestigando(const std::string& idModerador,
@@ -57,7 +63,7 @@ void GerenteDeDenuncias::marqueComoInvestigando(const std::string& idModerador,
     using Moderacao::Entidades::Denuncia;
     using Moderacao::Enums::EstadoDaDenuncia;
 
-    auto denunciasDao = this->contexto->obtenha<DenunciasDao>();
+    auto denunciasDao = this->contexto.obtenha<DenunciasDao>();
     auto denunciaEncontrada = denunciasDao->encontre(idDenuncia);
 
     if (!denunciaEncontrada)
@@ -69,7 +75,7 @@ void GerenteDeDenuncias::marqueComoInvestigando(const std::string& idModerador,
         return;
     }
 
-    auto usuariosDao = this->contexto->obtenha<UsuariosDao>();
+    auto usuariosDao = this->contexto.obtenha<UsuariosDao>();
     auto moderadorEncontrado = usuariosDao->encontre(idModerador);
 
     if (!moderadorEncontrado)
@@ -99,7 +105,7 @@ void GerenteDeDenuncias::marqueComoResolvida(const std::string& idModerador,
     using Moderacao::Entidades::Denuncia;
     using Moderacao::Enums::EstadoDaDenuncia;
 
-    auto denunciasDao = this->contexto->obtenha<DenunciasDao>();
+    auto denunciasDao = this->contexto.obtenha<DenunciasDao>();
     auto denunciaEncontrado = denunciasDao->encontre(idDenuncia);
 
     if (!denunciaEncontrado)
@@ -111,7 +117,7 @@ void GerenteDeDenuncias::marqueComoResolvida(const std::string& idModerador,
         return;
     }
 
-    auto usuariosDao = this->contexto->obtenha<UsuariosDao>();
+    auto usuariosDao = this->contexto.obtenha<UsuariosDao>();
     auto moderadorEncontrado = usuariosDao->encontre(idModerador);
 
     if (!moderadorEncontrado)

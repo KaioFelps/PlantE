@@ -4,13 +4,19 @@
 namespace Moderacao::Gerentes
 {
 
+GerenteDeDaosDeDenunciaveis::GerenteDeDaosDeDenunciaveis(
+    Roteador::Contexto& contexto_)
+    : contexto(contexto_)
+{
+}
+
 std::shared_ptr<Dao::DenunciavelDao>
 GerenteDeDaosDeDenunciaveis::obtenhaDao(Enums::TipoDoDenunciavel tipo) const
 {
     switch (tipo)
     {
     case Moderacao::Enums::TipoDoDenunciavel::USUARIO:
-        return this->contexto->obtenha<Identidade::Dao::UsuariosDao>();
+        return this->contexto.obtenha<Identidade::Dao::UsuariosDao>();
     default:
         throw std::runtime_error("Dao da entidade " +
                                  Enums::tipoDoDenunciavelParaString(tipo) +
