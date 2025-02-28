@@ -15,7 +15,7 @@ class PlantasDao
     virtual std::vector<Entidades::Planta>
     encontrePlantasCorrespondentes(const Entidades::Solo& solo) = 0;
 
-    virtual std::optional<Entidades::Planta>
+    virtual std::optional<std::shared_ptr<Entidades::Planta>>
     encontre(const std::string& idPlanta) = 0;
 
     virtual std::vector<Entidades::Planta> liste() const = 0;
