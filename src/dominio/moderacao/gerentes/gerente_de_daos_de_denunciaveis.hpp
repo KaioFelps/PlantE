@@ -1,3 +1,5 @@
+#pragma once
+
 #include "dominio/moderacao/dao/denunciavel_dao.hpp"
 #include "roteador.hpp"
 

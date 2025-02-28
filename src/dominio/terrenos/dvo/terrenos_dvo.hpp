@@ -1,3 +1,5 @@
+#pragma once
+
 #include "dominio/terrenos/entidades/solo.hpp"
 #include <memory>
 

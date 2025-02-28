@@ -1,3 +1,5 @@
+#pragma once
+
 #include "dominio/moderacao/entidades/denuncia.hpp"
 #include "roteador.hpp"
 #include <vector>
