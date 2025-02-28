@@ -27,6 +27,16 @@ class GerenteDeTerrenos
                            unsigned char indiceDeArgila,
                            unsigned char indiceDeSilte,
                            unsigned char cargaEletrica);
+
+    void finalizePlantacao(const std::string& idTerreno);
+
+    void desistaDaPlantacao(const std::string& idTerreno);
+
+    void adicionePlantacao(const std::string& idTerreno,
+                           const std::string& idPlanta);
+
+    std::optional<Entidades::Plantacao>
+    obtenhaPlantacao(const std::string& idTerreno) const;
 };
 
 } // namespace Terrenos::Gerentes

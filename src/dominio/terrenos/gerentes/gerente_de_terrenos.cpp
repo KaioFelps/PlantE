@@ -1,5 +1,6 @@
 #include "gerente_de_terrenos.hpp"
 #include "dominio/identidade/dao/usuarios_dao.hpp"
+#include "dominio/terrenos/dao/plantacoes_dao.hpp"
 #include "dominio/terrenos/dao/plantas_dao.hpp"
 #include "dominio/terrenos/dao/terrenos_dao.hpp"
 #include "dominio/terrenos/dvo/terrenos_dvo.hpp"
@@ -105,9 +106,119 @@ void GerenteDeTerrenos::recebaDadosDoSolo(std::string idTerreno,
             "\".");
     }
 
+    auto terreno = std::make_shared<Terreno>(*terrenoEncontrado);
+    terreno->atualizeSolo(std::move(solo));
+    terrenosDao->salve(terreno);
+}
+
+void GerenteDeTerrenos::finalizePlantacao(const std::string& idTerreno)
+{
+    using Terrenos::Dao::TerrenosDao;
+    using Terrenos::Entidades::Terreno;
+
+    auto terrenosDao = this->contexto->obtenha<TerrenosDao>();
+    auto terrenoEncontrado = terrenosDao->encontre(idTerreno);
+
+    if (!terrenoEncontrado)
+    {
+        throw std::invalid_argument(
+            "Não foi possível encontrar um terreno com id \"" + idTerreno +
+            "\".");
+    }
+
+    // Embora seja uma nova instância de `Terreno`, contém uma referência para a
+    // `Plantacao` real, fazendo com que as alterações sejam, de fato,
+    // realizadas na instância de `Plantacao` armazenada na memória
+    auto terreno = std::make_shared<Terreno>(*terrenoEncontrado);
+    terreno->finalizePlantacaoAtiva();
+    terrenosDao->salve(terreno);
+}
+
+void GerenteDeTerrenos::desistaDaPlantacao(const std::string& idTerreno)
+{
+    using Terrenos::Dao::TerrenosDao;
+    using Terrenos::Entidades::Terreno;
+
+    auto terrenosDao = this->contexto->obtenha<TerrenosDao>();
+    auto terrenoEncontrado = terrenosDao->encontre(idTerreno);
+
+    if (!terrenoEncontrado)
+    {
+        throw std::invalid_argument(
+            "Não foi possível encontrar um terreno com id \"" + idTerreno +
+            "\".");
+    }
+
+    // Embora seja uma nova instância de `Terreno`, contém uma referência para a
+    // `Plantacao` real, fazendo com que as alterações sejam, de fato,
+    // realizadas na instância de `Plantacao` armazenada na memória
+    auto terreno = std::make_shared<Terreno>(*terrenoEncontrado);
+    terreno->desistaDaPlantacaoAtiva();
+    terrenosDao->salve(terreno);
+}
+
+void GerenteDeTerrenos::adicionePlantacao(const std::string& idTerreno,
+                                          const std::string& idPlanta)
+{
+    using Terrenos::Dao::PlantacoesDao;
+    using Terrenos::Dao::PlantasDao;
+    using Terrenos::Dao::TerrenosDao;
+    using Terrenos::Entidades::Terreno;
+
+    auto plantasDao = this->contexto->obtenha<PlantasDao>();
+    auto plantacoesDao = this->contexto->obtenha<PlantacoesDao>();
+    auto terrenosDao = this->contexto->obtenha<TerrenosDao>();
+
+    auto terrenoEncontrado = terrenosDao->encontre(idTerreno);
+    if (!terrenoEncontrado)
+    {
+        throw std::invalid_argument(
+            "Não foi possível encontrar um terreno com id \"" + idTerreno +
+            "\".");
+    }
+
+    auto plantaEncontrada = plantasDao->encontre(idPlanta);
+    if (!plantaEncontrada)
+    {
+        throw std::invalid_argument(
+            "Não foi possível encontrar uma planta com id\"" + idPlanta +
+            "\".");
+    }
+
+    auto planta = *plantaEncontrada;
+    auto terreno = std::make_shared<Terreno>(*terrenoEncontrado);
+
+    auto plantacao = plantacoesDao->crie(planta, terreno);
+
+    terreno->finalizePlantacaoAtiva();
+    terrenosDao->salve(terreno);
+}
+
+std::optional<Entidades::Plantacao>
+GerenteDeTerrenos::obtenhaPlantacao(const std::string& idTerreno) const
+{
+    using Terrenos::Dao::TerrenosDao;
+    using Terrenos::Entidades::Terreno;
+
+    auto terrenosDao = this->contexto->obtenha<TerrenosDao>();
+
+    auto terrenoEncontrado = terrenosDao->encontre(idTerreno);
+    if (!terrenoEncontrado)
+    {
+        throw std::invalid_argument(
+            "Não foi possível encontrar um terreno com id \"" + idTerreno +
+            "\".");
+    }
+
     auto terreno = *terrenoEncontrado;
-    terreno.atualizeSolo(std::move(solo));
-    terrenosDao->salve(std::move(terreno));
+    auto plantacaoAtiva = terreno.obtenhaPlantacaoAtiva();
+
+    if (!plantacaoAtiva)
+    {
+        return std::nullopt;
+    }
+
+    return **plantacaoAtiva;
 }
 
 } // namespace Terrenos::Gerentes
