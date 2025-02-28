@@ -1,12 +1,14 @@
 #include "dominio/identidade/dao/usuarios_dao.hpp"
 #include "dominio/identidade/entidades/usuario.hpp"
 #include "dominio/moderacao/dao/denuncias_dao.hpp"
+#include "dominio/terrenos/dao/plantacoes_dao.hpp"
 #include "dominio/terrenos/dao/plantas_dao.hpp"
 #include "dominio/terrenos/dao/terrenos_dao.hpp"
 #include "dominio/terrenos/entidades/solo.hpp"
 #include "dominio/terrenos/entidades/terreno.hpp"
 #include "globais.hpp"
 #include "infra/dao/em_memoria/denuncias_dao_em_memoria.hpp"
+#include "infra/dao/em_memoria/plantacoes_dao_em_memoria.hpp"
 #include "infra/dao/em_memoria/plantas_dao_em_memoria.hpp"
 #include "infra/dao/em_memoria/terrenos_dao_em_memoria.hpp"
 #include "infra/dao/em_memoria/usuarios_dao_em_memoria.hpp"
@@ -46,6 +48,7 @@ int main(int argc, char* argv[])
     auto usuariosDao = std::make_shared<UsuariosDaoEmMemoria>();
     auto denunciasDao = std::make_shared<DenunciasDaoEmMemoria>();
     auto terrenosDao = std::make_shared<TerrenosDaoEmMemoria>();
+    auto plantacoesDao = std::make_shared<PlantacoesDaoEmMemoria>();
 
     usuariosDao->coloque(usuario);
 
@@ -54,6 +57,8 @@ int main(int argc, char* argv[])
     contexto->coloque<UsuariosDao>(usuariosDao);
     contexto->coloque<DenunciasDao>(denunciasDao);
     contexto->coloque<TerrenosDao>(terrenosDao);
+    contexto->coloque<TerrenosDao>(terrenosDao);
+    contexto->coloque<PlantacoesDao>(plantacoesDao);
     contexto->coloque(usuario);
 
     aplicativo.registrarRota("obter-sugestao-de-replantio",
