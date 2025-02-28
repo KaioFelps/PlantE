@@ -1,13 +1,13 @@
 # Plant&
 
 ## Requisitos
-- [ ] Implementar ao menos 1 caso de uso;
-- [ ] Implementar 8 operações dos contratos de operações;
+- [x] Implementar ao menos 1 caso de uso;
+- [x] Implementar 8 operações dos contratos de operações;
 - [x] Código orientado a objetos;
 - [x] Compila e executa;
 
 ### Casos de usos
-- [ ] Inserir Resultado da Análise do Solo
+- [x] Inserir Resultado da Análise do Solo
 - [ ] Realizar Denúncia
 - [ ] Investigar Denúncia
 - [ ] Resolver Denúncia
