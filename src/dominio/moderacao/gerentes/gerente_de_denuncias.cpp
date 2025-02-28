@@ -64,7 +64,7 @@ void GerenteDeDenuncias::marqueComoInvestigando(const std::string& idModerador,
     {
         throw std::invalid_argument(
             "Não foi possível encontrar a denúncia o com id \"" + idDenuncia +
-            "\".\n");
+            "\".");
 
         return;
     }
@@ -76,7 +76,7 @@ void GerenteDeDenuncias::marqueComoInvestigando(const std::string& idModerador,
     {
         throw std::invalid_argument(
             "Não foi possível encontrar o moderador com id \"" + idModerador +
-            "\".\n");
+            "\".");
 
         return;
     }
@@ -106,7 +106,7 @@ void GerenteDeDenuncias::marqueComoResolvida(const std::string& idModerador,
     {
         throw std::invalid_argument(
             "Não foi possível encontrar a denúncia o com id \"" + idDenuncia +
-            "\".\n");
+            "\".");
 
         return;
     }
@@ -118,7 +118,7 @@ void GerenteDeDenuncias::marqueComoResolvida(const std::string& idModerador,
     {
         throw std::invalid_argument(
             "Não foi possível encontrar o moderador com id \"" + idModerador +
-            "\".\n");
+            "\".");
 
         return;
     }
