@@ -1,6 +1,7 @@
 #include "dominio/identidade/dao/usuarios_dao.hpp"
 #include "dominio/identidade/entidades/usuario.hpp"
 #include "dominio/moderacao/dao/denuncias_dao.hpp"
+#include "dominio/terrenos/casos_de_uso/inserir_resultado_de_analise_de_solo.hpp"
 #include "dominio/terrenos/dao/plantacoes_dao.hpp"
 #include "dominio/terrenos/dao/plantas_dao.hpp"
 #include "dominio/terrenos/dao/terrenos_dao.hpp"
@@ -60,18 +61,21 @@ int main(int argc, char* argv[])
     contexto->coloque<PlantacoesDao>(plantacoesDao);
     contexto->coloque(usuario);
 
-    aplicativo.registrarRota("obter-sugestao-de-replantio",
-                             "Obter sugestão de replantio",
-                             [](const Roteador::Contexto& contexto)
-                             {
-                                 std::shared_ptr<PlantasDao> plantasDao =
-                                     contexto.obtenha<PlantasDao>();
+    aplicativo.registrarRota(
+        "inserir-resultado-de-analise-de-solo",
+        "Inserir Resultado de Análise de Solo",
+        [](Roteador::Contexto& contexto)
+        {
+            using Terrenos::CasosDeUso::InserirResultadoDeAnaliseDeSolo;
+            using Terrenos::Gerentes::GerenteDeTerrenos;
 
-                                 auto usuario = contexto.obtenha<Usuario>();
-                                 std::cout
-                                     << "Usuario: " << *usuario->obtenhaNome()
-                                     << ".\n";
-                             });
+            auto gerente = GerenteDeTerrenos(contexto);
+
+            auto casoDeUso = InserirResultadoDeAnaliseDeSolo(gerente);
+
+            const auto& idUsuario = contexto.obtenha<Usuario>()->obtenhaId();
+            casoDeUso.executar(idUsuario);
+        });
 
     aplicativo.rodar();
 
