@@ -1,7 +1,7 @@
 #include "terreno.hpp"
 #include "util/id.hpp"
 #include <iostream>
-#include <utility>
+#include <stdexcept>
 
 namespace Terrenos::Entidades
 {
@@ -100,17 +100,16 @@ void Terreno::coloqueClima(Terrenos::Enums::Clima clima)
 /// - `false`, se já houver uma plantação
 ///  associada ao terreno. Nesse caso, também imprime uma mensagem de alerta na
 ///  saída de erro.
-bool Terreno::coloquePlantacaoAtiva(std::shared_ptr<Plantacao> plantacao)
+void Terreno::coloquePlantacaoAtiva(std::shared_ptr<Plantacao> plantacao)
 {
     if (this->plantacaoAtiva.has_value())
     {
-        std::cerr << "Já existe uma plantação ativa no Terreno de id "
-                  << this->id << ".\n";
-        return false;
+        throw std::invalid_argument(
+            "Já existe uma plantação ativa no Terreno de id \"" + this->id +
+            "\".");
     }
 
     this->plantacaoAtiva = std::move(plantacao);
-    return true;
 }
 
 void Terreno::finalizePlantacaoAtiva()

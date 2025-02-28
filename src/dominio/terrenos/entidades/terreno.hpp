@@ -54,7 +54,7 @@ class Terreno
     void atualizeSolo(std::unique_ptr<Solo> solo);
     void coloqueExposicaoSolar(Terrenos::Enums::ExposicaoSolar exposicaoSolar);
     void coloqueClima(Terrenos::Enums::Clima clima);
-    bool coloquePlantacaoAtiva(std::shared_ptr<Plantacao> plantacao);
+    void coloquePlantacaoAtiva(std::shared_ptr<Plantacao> plantacao);
     void finalizePlantacaoAtiva();
     void desistaDaPlantacaoAtiva();
 };
