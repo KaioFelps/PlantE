@@ -11,10 +11,10 @@ namespace Terrenos::Gerentes
 class GerenteDeTerrenos
 {
   private:
-    std::shared_ptr<Roteador::Contexto> contexto;
+    Roteador::Contexto& contexto;
 
   public:
-    GerenteDeTerrenos(std::shared_ptr<Roteador::Contexto> contexto);
+    GerenteDeTerrenos(Roteador::Contexto& contexto);
 
     std::vector<Entidades::Planta>
     obtenhaSugestoes(const std::string& idTerreno) const;

@@ -10,9 +10,8 @@
 namespace Terrenos::Gerentes
 {
 
-GerenteDeTerrenos::GerenteDeTerrenos(
-    std::shared_ptr<Roteador::Contexto> contexto_)
-    : contexto(std::move(contexto_))
+GerenteDeTerrenos::GerenteDeTerrenos(Roteador::Contexto& contexto_)
+    : contexto(contexto_)
 {
 }
 
@@ -23,8 +22,8 @@ GerenteDeTerrenos::obtenhaSugestoes(const std::string& idTerreno) const
     using Terrenos::Dao::TerrenosDao;
     using Terrenos::Entidades::Planta;
 
-    auto terrenosDao = this->contexto->obtenha<TerrenosDao>();
-    auto plantasDao = this->contexto->obtenha<PlantasDao>();
+    auto terrenosDao = this->contexto.obtenha<TerrenosDao>();
+    auto plantasDao = this->contexto.obtenha<PlantasDao>();
 
     auto terrenoEncontrado = terrenosDao->encontre(idTerreno);
 
@@ -55,8 +54,8 @@ GerenteDeTerrenos::listeTerrenos(const std::string& idUsuario) const
     using Identidade::Entidades::Usuario;
     using Terrenos::Dao::TerrenosDao;
 
-    auto terrenosDao = this->contexto->obtenha<TerrenosDao>();
-    auto usuariosDao = this->contexto->obtenha<UsuariosDao>();
+    auto terrenosDao = this->contexto.obtenha<TerrenosDao>();
+    auto usuariosDao = this->contexto.obtenha<UsuariosDao>();
 
     auto usuarioEncontrado = usuariosDao->encontre(idUsuario);
 
@@ -85,7 +84,7 @@ void GerenteDeTerrenos::recebaDadosDoSolo(std::string idTerreno,
     using Terrenos::Entidades::Solo;
     using Terrenos::Entidades::Terreno;
 
-    auto terrenosDao = this->contexto->obtenha<TerrenosDao>();
+    auto terrenosDao = this->contexto.obtenha<TerrenosDao>();
 
     auto solo = terrenosDao->crieSolo(acidez,
                                       indiceDeMinerais,
@@ -116,7 +115,7 @@ void GerenteDeTerrenos::finalizePlantacao(const std::string& idTerreno)
     using Terrenos::Dao::TerrenosDao;
     using Terrenos::Entidades::Terreno;
 
-    auto terrenosDao = this->contexto->obtenha<TerrenosDao>();
+    auto terrenosDao = this->contexto.obtenha<TerrenosDao>();
     auto terrenoEncontrado = terrenosDao->encontre(idTerreno);
 
     if (!terrenoEncontrado)
@@ -139,7 +138,7 @@ void GerenteDeTerrenos::desistaDaPlantacao(const std::string& idTerreno)
     using Terrenos::Dao::TerrenosDao;
     using Terrenos::Entidades::Terreno;
 
-    auto terrenosDao = this->contexto->obtenha<TerrenosDao>();
+    auto terrenosDao = this->contexto.obtenha<TerrenosDao>();
     auto terrenoEncontrado = terrenosDao->encontre(idTerreno);
 
     if (!terrenoEncontrado)
@@ -165,9 +164,9 @@ void GerenteDeTerrenos::adicionePlantacao(const std::string& idTerreno,
     using Terrenos::Dao::TerrenosDao;
     using Terrenos::Entidades::Terreno;
 
-    auto plantasDao = this->contexto->obtenha<PlantasDao>();
-    auto plantacoesDao = this->contexto->obtenha<PlantacoesDao>();
-    auto terrenosDao = this->contexto->obtenha<TerrenosDao>();
+    auto plantasDao = this->contexto.obtenha<PlantasDao>();
+    auto plantacoesDao = this->contexto.obtenha<PlantacoesDao>();
+    auto terrenosDao = this->contexto.obtenha<TerrenosDao>();
 
     auto terrenoEncontrado = terrenosDao->encontre(idTerreno);
     if (!terrenoEncontrado)
@@ -200,7 +199,7 @@ GerenteDeTerrenos::obtenhaPlantacao(const std::string& idTerreno) const
     using Terrenos::Dao::TerrenosDao;
     using Terrenos::Entidades::Terreno;
 
-    auto terrenosDao = this->contexto->obtenha<TerrenosDao>();
+    auto terrenosDao = this->contexto.obtenha<TerrenosDao>();
 
     auto terrenoEncontrado = terrenosDao->encontre(idTerreno);
     if (!terrenoEncontrado)
