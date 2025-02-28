@@ -21,13 +21,13 @@
 - [x] `listeDenuncias`;
 - [x] `marqueComoInvestigando`;
 - [x] `marqueComoResolvida`;
-- [ ] `listePlantas`;
-- [ ] `adicionePlantacao`;
+- [x] `listePlantas`;
+- [x] `adicionePlantacao`;
 
 **Extras**
 - [x] `obtenhaSugestoes`;
-- [ ] `finalizePlantacao`;
-- [ ] `desistaDaPlantacao`;
+- [x] `finalizePlantacao`;
+- [x] `desistaDaPlantacao`;
 - [x] `denuncie`
 - [x] `obtenhaDenuncia`
 
