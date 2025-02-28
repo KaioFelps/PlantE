@@ -4,7 +4,7 @@
 
 namespace Daos::EmMemoria
 {
-class PlantacoesDaoEmMemoria : Terrenos::Dao::PlantacoesDao
+class PlantacoesDaoEmMemoria : public Terrenos::Dao::PlantacoesDao
 {
   public:
     std::optional<Terrenos::Entidades::Plantacao>

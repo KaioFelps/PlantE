@@ -57,7 +57,6 @@ int main(int argc, char* argv[])
     contexto->coloque<UsuariosDao>(usuariosDao);
     contexto->coloque<DenunciasDao>(denunciasDao);
     contexto->coloque<TerrenosDao>(terrenosDao);
-    contexto->coloque<TerrenosDao>(terrenosDao);
     contexto->coloque<PlantacoesDao>(plantacoesDao);
     contexto->coloque(usuario);
 
