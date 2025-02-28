@@ -17,7 +17,7 @@ class TerrenosDaoEmMemoria : public Terrenos::Dao::TerrenosDao
              unsigned int indiceDeAreia,
              double cargaEletrica) final;
 
-    void salve(Terrenos::Entidades::Terreno terreno) final;
+    void salve(std::shared_ptr<Terrenos::Entidades::Terreno> terreno) final;
 
     std::vector<Terrenos::Entidades::Terreno> listeTodosDoUsuario(
         const Identidade::Entidades::Usuario& usuario) const final;

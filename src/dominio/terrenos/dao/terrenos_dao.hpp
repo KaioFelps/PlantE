@@ -24,7 +24,7 @@ class TerrenosDao
              unsigned int indiceDeAreia,
              double cargaEletrica) = 0;
 
-    virtual void salve(Entidades::Terreno terreno) = 0;
+    virtual void salve(std::shared_ptr<Entidades::Terreno> terreno) = 0;
 
     virtual std::vector<Entidades::Terreno> listeTodosDoUsuario(
         const Identidade::Entidades::Usuario& usuario) const = 0;
