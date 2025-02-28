@@ -14,6 +14,8 @@ class PlantasDaoEmMemoria : public Terrenos::Dao::PlantasDao
     std::optional<Terrenos::Entidades::Planta>
     encontre(const std::string& idPlanta) final;
 
+    std::vector<Terrenos::Entidades::Planta> liste() const final;
+
   private:
     static bool plantaEhCompativel(const Terrenos::Entidades::Planta& planta,
                                    const Terrenos::Entidades::Solo& solo);
