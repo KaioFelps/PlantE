@@ -50,13 +50,14 @@ TerrenosDaoEmMemoria::crieSolo(double acidez,
     return solo;
 }
 
-void TerrenosDaoEmMemoria::salve(Terrenos::Entidades::Terreno terreno)
+void TerrenosDaoEmMemoria::salve(
+    std::shared_ptr<Terrenos::Entidades::Terreno> terreno)
 {
     using Globais::terrenosDb;
     using Globais::terrenosDbMutex;
     using Terrenos::Entidades::Terreno;
 
-    auto idTerreno = terreno.obtenhaId();
+    auto idTerreno = terreno->obtenhaId();
     std::lock_guard<std::mutex> lock(*terrenosDbMutex);
 
     auto terrenoEncontrado =
@@ -66,15 +67,14 @@ void TerrenosDaoEmMemoria::salve(Terrenos::Entidades::Terreno terreno)
                      { return terreno_->obtenhaId() == idTerreno; });
 
     bool terrenoExiste = terrenoEncontrado != terrenosDb->end();
-    auto terrenoCompartilhado = std::make_shared<Terreno>(std::move(terreno));
 
     if (terrenoExiste)
     {
-        (*terrenoEncontrado) = terrenoCompartilhado;
+        (*terrenoEncontrado) = terreno;
         return;
     }
 
-    terrenosDb->push_back(terrenoCompartilhado);
+    terrenosDb->push_back(terreno);
 }
 
 std::vector<Terrenos::Entidades::Terreno>
