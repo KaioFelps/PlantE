@@ -7,9 +7,10 @@ namespace Terrenos::Gerentes
 class GerenteDePlantacoes
 {
   private:
-    std::shared_ptr<Roteador::Contexto> contexto;
+    Roteador::Contexto& contexto;
 
   public:
+    GerenteDePlantacoes(Roteador::Contexto& contexto);
     std::vector<Entidades::Planta> listePlantas() const;
 };
 

@@ -14,9 +14,11 @@ namespace Moderacao::Gerentes
 class GerenteDeDaosDeDenunciaveis
 {
   private:
-    std::shared_ptr<Roteador::Contexto> contexto;
+    Roteador::Contexto& contexto;
 
   public:
+    GerenteDeDaosDeDenunciaveis(Roteador::Contexto& contexto);
+
     std::shared_ptr<Dao::DenunciavelDao>
     obtenhaDao(Enums::TipoDoDenunciavel tipo) const;
 };

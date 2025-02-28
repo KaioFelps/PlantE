@@ -10,9 +10,11 @@ namespace Moderacao::Gerentes
 class GerenteDeDenuncias
 {
   private:
-    std::shared_ptr<Roteador::Contexto> contexto;
+    Roteador::Contexto& contexto;
 
   public:
+    GerenteDeDenuncias(Roteador::Contexto& contexto);
+
     // Essas funções não retornam um `shared_ptr` porque, de fato, elas devem
     // copiar todas as Denuncias. Fornecendo o shared_ptr, as instâncias seriam
     // mutáveis e refletiriam diretamente no armazenamento em memória. Se a
