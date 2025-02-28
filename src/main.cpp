@@ -1,40 +1,83 @@
+#include "dominio/identidade/dao/usuarios_dao.hpp"
 #include "dominio/identidade/entidades/usuario.hpp"
+#include "dominio/moderacao/dao/denuncias_dao.hpp"
+#include "dominio/terrenos/casos_de_uso/inserir_resultado_de_analise_de_solo.hpp"
+#include "dominio/terrenos/dao/plantacoes_dao.hpp"
+#include "dominio/terrenos/dao/plantas_dao.hpp"
+#include "dominio/terrenos/dao/terrenos_dao.hpp"
 #include "dominio/terrenos/entidades/solo.hpp"
 #include "dominio/terrenos/entidades/terreno.hpp"
+#include "globais.hpp"
+#include "infra/dao/em_memoria/denuncias_dao_em_memoria.hpp"
+#include "infra/dao/em_memoria/plantacoes_dao_em_memoria.hpp"
+#include "infra/dao/em_memoria/plantas_dao_em_memoria.hpp"
+#include "infra/dao/em_memoria/terrenos_dao_em_memoria.hpp"
+#include "infra/dao/em_memoria/usuarios_dao_em_memoria.hpp"
+#include "roteador.hpp"
+#include "util/datas.hpp"
 #include <ctime>
 #include <iostream>
 
-using namespace Terrenos::Entidades;
-using namespace Identidade::Entidades;
-using namespace Identidade::Enums;
-
-int main()
+int main(int argc, char* argv[])
 {
-    auto* terreno = new Terreno(1000, 1000);
-    terreno->atualizeSolo(new Solo(10, 10, 10, 10, 10, 10, 10));
+    using namespace Terrenos::Entidades;
+    using namespace Identidade::Entidades;
+    using namespace Identidade::Dao;
+    using namespace Terrenos::Dao;
+    using namespace Identidade::Enums;
+    using namespace Daos::EmMemoria;
+    using namespace Moderacao::Dao;
+    using namespace Terrenos::Dao;
 
-    std::cout << "Hello World!\n";
+    if (argc >= 2 && std::string_view(argv[ 1 ]) == "--seed")
+    {
+        std::cout << "Populando os armazenamentos em memória...\n";
+        Daos::EmMemoria::Globais::popular();
+    }
 
-    std::cout << "Tamanho do terreno: " << terreno->obtenhaTamanho() << "km²"
-              << std::endl;
+    // não há tempo o bastante para implementar toda a parte do login
+    auto usuario =
+        std::make_shared<Usuario>("John Doe",
+                                  "johndoe@gmail.com",
+                                  "12345678",
+                                  Utils::DataHora::obtenhaDataHoraAtual(),
+                                  Identidade::Enums::Cargo::USUARIO);
 
-    delete terreno;
+    Roteador::Aplicativo aplicativo;
 
-    auto* usuario = new Usuario("John Doe",
-                                "johndoe@gmail.com",
-                                "senha-hasheada",
-                                time(nullptr),
-                                Cargo::ADMINISTRADOR);
+    auto plantasDao = std::make_shared<PlantasDaoEmMemoria>();
+    auto usuariosDao = std::make_shared<UsuariosDaoEmMemoria>();
+    auto denunciasDao = std::make_shared<DenunciasDaoEmMemoria>();
+    auto terrenosDao = std::make_shared<TerrenosDaoEmMemoria>();
+    auto plantacoesDao = std::make_shared<PlantacoesDaoEmMemoria>();
 
-    std::cout << "Usuário: " << *usuario->obtenhaNome()
-              << "; Cargo: " << *usuario->obtenhaCargo()
+    usuariosDao->coloque(usuario);
 
-              << "; Nascido em: "
-              << std::asctime(
-                     std::localtime(usuario->obtenhaDataDeNascimento()))
-              << std::endl;
+    auto contexto = aplicativo.obtenhaContextoMutavel();
+    contexto->coloque<PlantasDao>(plantasDao);
+    contexto->coloque<UsuariosDao>(usuariosDao);
+    contexto->coloque<DenunciasDao>(denunciasDao);
+    contexto->coloque<TerrenosDao>(terrenosDao);
+    contexto->coloque<PlantacoesDao>(plantacoesDao);
+    contexto->coloque(usuario);
 
-    delete usuario;
+    aplicativo.registrarRota(
+        "inserir-resultado-de-analise-de-solo",
+        "Inserir Resultado de Análise de Solo",
+        [](Roteador::Contexto& contexto)
+        {
+            using Terrenos::CasosDeUso::InserirResultadoDeAnaliseDeSolo;
+            using Terrenos::Gerentes::GerenteDeTerrenos;
 
-    return 0;
+            auto gerente = GerenteDeTerrenos(contexto);
+
+            auto casoDeUso = InserirResultadoDeAnaliseDeSolo(gerente);
+
+            const auto& idUsuario = contexto.obtenha<Usuario>()->obtenhaId();
+            casoDeUso.executar(idUsuario);
+        });
+
+    aplicativo.rodar();
+
+    return EXIT_SUCCESS;
 }

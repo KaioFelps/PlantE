@@ -3,30 +3,29 @@
 namespace Identidade::Entidades
 {
 
-Usuario::Usuario(string nome,
-                 string email,
-                 string hashDaSeha,
-                 time_t dataDeNascimento,
-                 Cargo cargo)
+Usuario::Usuario(std::string nome_,
+                 std::string email_,
+                 std::string hashDaSeha_,
+                 time_t dataDeNascimento_,
+                 Cargo cargo_)
+    : Denunciavel(Moderacao::Enums::TipoDoDenunciavel::USUARIO),
+      nome(std::move(nome_)), email(std::move(email_)),
+      hashDaSeha(std::move(hashDaSeha_)), dataDeNascimento(dataDeNascimento_),
+      cargo(cargo_)
 {
-    this->nome = nome;
-    this->email = email;
-    this->hashDaSeha = hashDaSeha;
-    this->dataDeNascimento = dataDeNascimento;
-    this->cargo = cargo;
-};
+}
 
-const string* Usuario::obtenhaNome() const
+const std::string* Usuario::obtenhaNome() const
 {
     return &this->nome;
 }
 
-const string* Usuario::obtenhaEmail() const
+const std::string* Usuario::obtenhaEmail() const
 {
     return &this->email;
 }
 
-const string* Usuario::obtenhaHashDaSeha() const
+const std::string* Usuario::obtenhaHashDaSeha() const
 {
     return &this->hashDaSeha;
 }
@@ -41,17 +40,17 @@ const Cargo* Usuario::obtenhaCargo() const
     return &this->cargo;
 }
 
-void Usuario::coloqueNome(string nome)
+void Usuario::coloqueNome(std::string nome)
 {
     this->nome = nome;
 }
 
-void Usuario::coloqueEmail(string email)
+void Usuario::coloqueEmail(std::string email)
 {
     this->email = email;
 }
 
-void Usuario::coloqueHashDaSeha(string hashDaSeha)
+void Usuario::coloqueHashDaSeha(std::string hashDaSeha)
 {
     this->hashDaSeha = hashDaSeha;
 }

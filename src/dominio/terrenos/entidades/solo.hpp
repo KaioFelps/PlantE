@@ -7,30 +7,30 @@ class Solo
 {
   private:
     // o tipo é unsigned char porque esses valores vão de 0 a 100
-    unsigned char acidez;
+    double acidez;
     unsigned char indiceDeMinerais;
-    unsigned char indiceDesalinidade;
+    unsigned char indiceDeSalinidade;
     unsigned char indiceDeArgila;
     unsigned char indiceDeAreia;
-    unsigned char indiceDeSilite;
-    unsigned char cargaEletrica;
+    unsigned char indiceDeSilte;
+    double cargaEletrica;
 
   public:
-    Solo(unsigned char acidez,
+    Solo(double acidez,
          unsigned char indiceDeMinerais,
-         unsigned char indiceDesalinidade,
+         unsigned char indiceDeSalinidade,
          unsigned char indiceDeArgila,
          unsigned char indiceDeAreia,
-         unsigned char indiceDeSilite,
-         unsigned char cargaEletrica);
+         unsigned char indiceDeSilte,
+         double cargaEletrica);
 
-    unsigned char obtenhaAcidez() const;
+    double obtenhaAcidez() const;
     unsigned char obtenhaIndiceDeMinerais() const;
-    unsigned char obtenhaIndiceDesalinidade() const;
+    unsigned char obtenhaIndiceDeSalinidade() const;
     unsigned char obtenhaIndiceDeArgila() const;
     unsigned char obtenhaIndiceDeAreia() const;
-    unsigned char obtenhaIndiceDeSilite() const;
-    unsigned char obtenhaCargaEletrica() const;
+    unsigned char obtenhaIndiceDeSilte() const;
+    double obtenhaCargaEletrica() const;
 };
 
 } // namespace Terrenos::Entidades

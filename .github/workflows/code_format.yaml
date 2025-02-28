@@ -1,0 +1,65 @@
+name: Code Formatting
+
+on:
+  push:
+  pull_request:
+
+permissions: 
+  contents: write
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  VCPKG_FEATURE_FLAGS: dependencygraph
+  VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+
+
+jobs:
+  check_code_format:
+    name: "Garante que o código esteja corretamente formatado"
+    runs-on: "ubuntu-22.04"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Instala clang-format"
+        run: sudo apt-get install -y clang-format-14
+
+      - name: "Confere a formatação recursivamente para todos os arquivos .cpp e .hpp"
+        run: find ./src/ \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-format --style=file:$GITHUB_WORKSPACE/.clang-format.yaml --Werror --dry-run {} +
+        
+  check_code_linting:
+    name: "Garante que o código esteja seguindo os padrões definidos na guia de contribuição"
+    runs-on: "ubuntu-latest"
+    steps:
+        - uses: actions/checkout@v4
+          with:
+            submodules: 'recursive'
+
+        - run: sudo apt-get update
+        
+        - name: "Exporta as variáveis de ambiente do GitHub Actions de cache"
+          uses: actions/github-script@v7
+          with:
+            script: |
+              core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+              core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+
+        - name: "Configura o vcpkg"
+          run: |
+            git clone https://github.com/microsoft/vcpkg.git
+            ./vcpkg/bootstrap-vcpkg.sh
+          
+        - name: "Configura o cmake"
+          run: |
+            cp CMakeUserPresets.example.json CMakeUserPresets.json
+            sed -i "s|<path to vcpkg>|${{github.workspace}}/vcpkg|g" "CMakeUserPresets.json"
+            cmake --preset=default
+
+        - name: "Instala o clang-tidy"
+          run: |
+            sudo apt-get install -y clang-tidy-14
+            sudo update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-14 100
+            clang-tidy-14 --version
+
+        - name: "Garante que os padrões de código exigidos estejam sendo seguidos"
+          run: find ./src/ \( -name "*.cpp" -o -name "*.hpp" \) -exec clang-tidy-14 --config-file=./.clang-tidy.yaml -p=./build --header-filter=src/.* --quiet --warnings-as-errors=* {} +

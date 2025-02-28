@@ -3,24 +3,21 @@
 namespace Terrenos::Entidades
 {
 
-Solo::Solo(unsigned char acidez,
-           unsigned char indiceDeMinerais,
-           unsigned char indiceDesalinidade,
-           unsigned char indiceDeArgila,
-           unsigned char indiceDeAreia,
-           unsigned char indiceDeSilite,
-           unsigned char cargaEletrica)
+Solo::Solo(double acidez_,
+           unsigned char indiceDeMinerais_,
+           unsigned char indiceDeSalinidade_,
+           unsigned char indiceDeArgila_,
+           unsigned char indiceDeAreia_,
+           unsigned char indiceDeSilte_,
+           double cargaEletrica_)
+    : acidez(acidez_), indiceDeMinerais(indiceDeMinerais_),
+      indiceDeSalinidade(indiceDeSalinidade_), indiceDeArgila(indiceDeArgila_),
+      indiceDeAreia(indiceDeAreia_), indiceDeSilte(indiceDeSilte_),
+      cargaEletrica(cargaEletrica_)
 {
-    this->acidez = acidez;
-    this->indiceDeMinerais = indiceDeMinerais;
-    this->indiceDesalinidade = indiceDesalinidade;
-    this->indiceDeArgila = indiceDeArgila;
-    this->indiceDeAreia = indiceDeAreia;
-    this->indiceDeSilite = indiceDeSilite;
-    this->cargaEletrica = cargaEletrica;
 }
 
-unsigned char Solo::obtenhaAcidez() const
+double Solo::obtenhaAcidez() const
 {
     return this->acidez;
 }
@@ -30,9 +27,9 @@ unsigned char Solo::obtenhaIndiceDeMinerais() const
     return this->indiceDeMinerais;
 }
 
-unsigned char Solo::obtenhaIndiceDesalinidade() const
+unsigned char Solo::obtenhaIndiceDeSalinidade() const
 {
-    return this->indiceDesalinidade;
+    return this->indiceDeSalinidade;
 }
 
 unsigned char Solo::obtenhaIndiceDeArgila() const
@@ -45,12 +42,12 @@ unsigned char Solo::obtenhaIndiceDeAreia() const
     return this->indiceDeAreia;
 }
 
-unsigned char Solo::obtenhaIndiceDeSilite() const
+unsigned char Solo::obtenhaIndiceDeSilte() const
 {
-    return this->indiceDeSilite;
+    return this->indiceDeSilte;
 }
 
-unsigned char Solo::obtenhaCargaEletrica() const
+double Solo::obtenhaCargaEletrica() const
 {
     return this->cargaEletrica;
 }
