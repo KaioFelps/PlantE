@@ -1,3 +1,5 @@
+#pragma once
+
 #include "dominio/terrenos/dao/plantacoes_dao.hpp"
 
 namespace Daos::EmMemoria

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "dominio/terrenos/entidades/plantacao.hpp"
 #include <optional>
 

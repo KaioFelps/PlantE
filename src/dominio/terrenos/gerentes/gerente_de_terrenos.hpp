@@ -1,3 +1,5 @@
+#pragma once
+
 #include "dominio/terrenos/entidades/planta.hpp"
 #include "dominio/terrenos/entidades/terreno.hpp"
 #include "roteador.hpp"
