@@ -31,8 +31,25 @@ PlantasDaoEmMemoria::encontrePlantasCorrespondentes(const Solo& solo)
     return plantasCompativeis;
 }
 
-std::optional<std::shared_ptr<Planta>>
-PlantasDaoEmMemoria::encontre(const std::string& idPlanta)
+std::vector<Terrenos::Entidades::Planta> PlantasDaoEmMemoria::liste() const
+{
+    using Globais::plantasDb;
+    using Globais::plantasDbMutex;
+    using Terrenos::Entidades::Planta;
+    std::lock_guard<std::mutex> lock(*plantasDbMutex);
+
+    auto listaDePlantas = std::vector<Planta>();
+    listaDePlantas.reserve(plantasDb->size());
+
+    std::for_each(plantasDb->begin(),
+                  plantasDb->end(),
+                  [ &listaDePlantas ](const std::shared_ptr<Planta>& planta)
+                  { listaDePlantas.push_back(*planta); });
+
+    return listaDePlantas;
+}
+
+std::optional<Planta> PlantasDaoEmMemoria::encontre(const std::string& idPlanta)
 {
     std::lock_guard<std::mutex> lock(*Globais::plantasDbMutex);
 
@@ -46,7 +63,7 @@ PlantasDaoEmMemoria::encontre(const std::string& idPlanta)
 
     if (plantaFoiEncontrada)
     {
-        return *plantasIterator;
+        return **plantasIterator;
     }
 
     return std::nullopt;
